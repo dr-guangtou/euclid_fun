@@ -1,6 +1,6 @@
 # Plan: UCD candidate search with Gaia + Euclid DR1 + Legacy Surveys (Fornax pilot)
 
-Status: **plan approved in interview on 2026-11-13; run not started.** This file is the source of truth for the
+Status: **plan approved on 2026-11-13 with three review comments (section 3.1); run started the same day.** This file is the source of truth for the
 overnight run. After any interruption or context loss, read this file and the run log first
 (`~/data/euclid/bubbletea/runs/<run_id>/run_log.md`), then continue with the first stage that has no passed gate.
 
@@ -48,6 +48,21 @@ re-training any selector.
 | Visual vetting | Claude looks at every final cutout and records a note and a flag in a separate column. Notes never remove or re-rank an object |
 | Git during the run | One commit per finished stage on `ucd-search-pilot`, pushed. No merge into `main`, no pull request, nothing on the website |
 | Failed stage | Up to two documented fix-and-retry attempts; then continue only with independent stages and mark later products provisional. Pass criteria are never loosened |
+
+### 3.1 Review comments from the user (2026-11-13), binding
+
+1. **Photo-z is not expected to help.** Download the PHZ columns only if it costs nothing extra (one join); never
+   spend time on them and never use them in the selection.
+2. **The Gaia-to-Euclid epoch difference is an opportunity, not only a risk.** With ~8.6 yr between Gaia (2016.0) and
+   Euclid, the displacement between the two positions is an independent proper-motion test: stars move, UCDs do not.
+   It also covers Gaia sources that have no proper motion at all (2-parameter solutions), which dominate the
+   selector's output. The astrometric frames may not be perfectly aligned yet, so Stage 3 first measures and removes
+   the local zero-point and measures the scatter; the displacement becomes a selection criterion only if that
+   calibration shows it is precise enough, otherwise it stays an information column.
+3. **Always start from the Gaia source.** Gaia photometry and astrometry are the core of BubbleTea. The Gaia position
+   is the anchor: the Euclid and Legacy entries are whatever lies at that position. Over-deblending of the Euclid
+   catalogue is handled around the Gaia source (nearest entry, neighbours and parent recorded), never by starting
+   from Euclid entries.
 
 ## 4. Layout
 
@@ -144,10 +159,14 @@ Each stage lists its goal, method, QA figures and gate (pass criteria). Numbers 
 
 - **Goal:** Euclid photometry, sizes, shapes, flags, classification and photo-z for every Gaia source.
 - **Method:** pull MER wide catalogue + morphology + PHZ rows around the Gaia positions; match by position after
-  propagating Gaia (epoch 2016.0) to the tile epoch, and compare with MER's own `gaia_id`; calibrate the match radius
+  propagating Gaia (epoch 2016.0) to the tile epoch, and compare with MER's own `gaia_id`; measure the
+  Gaia-to-Euclid displacement at the unpropagated Gaia position, after removing the local frame offset (per tile,
+  from the median of all matches), and validate it against Gaia proper motions where they exist; calibrate the match radius
   with displaced-position controls; keep all in-radius candidates and an ambiguity flag; resolve tile-overlap
   duplicates; record coverage, saturation, `spurious_flag`, `det_quality_flag`, shredding (`parent_id`).
 - **QA figures:** separation histogram with the random-offset control; match fraction versus G; G versus I_E;
+  displacement versus Gaia proper motion x baseline (calibration of the opportunity in comment 2), and its
+  scatter versus magnitude;
   compactness diagrams (`mumax_minus_mag` and Sersic radius versus magnitude) with stars, galaxies and known UCDs.
 - **Gate:** false-match rate from offsets below 1% at the adopted radius; agreement between the positional match and
   `gaia_id` reported (disagreements listed); G - I_E versus colour consistent between the two fields.
@@ -167,13 +186,14 @@ Each stage lists its goal, method, QA figures and gate (pass criteria). Numbers 
 - **Goal:** a transparent cut flow from all Gaia sources to promising candidates.
 - **Method:** every criterion is a boolean column; nothing is deleted. Criteria come from Stage 1 limits, from the
   control field, and from reference UCDs **outside Fornax**:
-  1. Gaia: frozen selector score; no significant parallax or proper motion.
+  1. Gaia: frozen selector score; no significant parallax or proper motion; no significant Gaia-to-Euclid
+     displacement (used as a cut only if Stage 3 validated it).
   2. Euclid quality: covered, not spurious, not saturated, not a shredded fragment of a large galaxy.
   3. Euclid size: resolved beyond the stellar locus, and smaller than the angular size of a 100 pc object at the
      host distance (for hostless fields: stated in arcsec).
   4. Shape: round and compact (ellipticity, Sersic fit quality).
   5. Colour: within the old-stellar-population locus in grz and I_E, Y, J, H defined from non-Fornax reference UCDs.
-  6. Information only, never a veto tonight: `phz_glob_cl_prob` and the other PHZ probabilities, photo-z, Tractor
+  6. Information only, never a veto: `phz_glob_cl_prob` and the other PHZ probabilities, photo-z (if downloaded), Tractor
      type, Gaia galaxy/QSO candidate membership.
   Tiers A / B / C from the number and strength of criteria met.
 - **QA figures:** cut-flow bars for Fornax and control; size-magnitude and colour-colour diagrams of survivors with
@@ -217,9 +237,9 @@ Each stage lists its goal, method, QA figures and gate (pass criteria). Numbers 
   recovery is always reported for "in Gaia" and "all" separately.
 - Many known UCDs at 20 Mpc are at or below one VIS pixel in r_h; Euclid may resolve only the larger ones. Stage 1
   measures this instead of assuming it.
-- Photo-z cannot confirm a z ~ 0.005 object; it can only flag background galaxies, and bright-compact sources often
-  get poor photo-z.
-- Gaia (2016.0) and Euclid (about 2024.6) epochs differ by ~8.6 yr; stars with proper motion shift, UCDs do not.
+- Photo-z is not used (comment 1).
+- Gaia (2016.0) and Euclid (about 2024.6) epochs differ by ~8.6 yr. This is used as a proper-motion test (comment 2);
+  the risk is the frame alignment between the two, which Stage 3 measures before the displacement is trusted.
 - MER shreds large galaxies and the sky near NGC 1399 is crowded; fragments can mimic compact sources.
 - Legacy DR11 identifiers differ from DR10, and bubbletea saw dark DR11 cutout layers; cutouts fall back to DR10.
 - Cluster environment: the 1 deg field lies inside the virial radius, so the control field, not an outer annulus,

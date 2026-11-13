@@ -1,0 +1,70 @@
+# UCD search pilot: Fornax cluster core plus a control field (plan: docs/ucd_pilot_plan.md).
+run_id: fornax_pilot_20261113
+data_root: ~/data/euclid/bubbletea
+
+bubbletea:
+  repository: ~/Dropbox/work/project/bubbletea
+  external_data: ~/Dropbox/work/data/bubbletea
+
+gaia:
+  # NOIRLab Data Lab copy of Gaia DR3 (bubbletea's production route). The ESA archive rate-limited
+  # anonymous queries on 2026-11-13 (HTTP 429), so it is only the fallback.
+  release: gaia_dr3
+  tap_url: https://datalab.noirlab.edu/tap
+  table: gaia_dr3.gaia_source
+  cone_syntax: q3c
+  maximum_rows_per_query: 5000
+  fallback:
+    tap_url: https://gea.esac.esa.int/tap-server/tap
+    table: gaiadr3.gaia_source
+    cone_syntax: adql
+  reference_epoch_year: 2016.0
+
+euclid:
+  catalogue: dr1.mer_catalogue_wide_survey
+  morphology: dr1.mer_morphology_wide_survey
+  classification: dr1.phz_classification_wide
+  footprint_moc: ~/data/euclid/dr1_demo/footprint/dr1_wide_vis_tiles_moc_order13.fits
+
+legacy:
+  release: dr11_south
+  lsdb_url: http://slac.data.lsdb.io:10942/lsdb/legacysurvey_dr11.0_south
+  cutout_url: https://www.legacysurvey.org/viewer
+  cutout_layers: [ls-dr11-south, ls-dr10]
+
+fields:
+  fornax:
+    role: target
+    ra_deg: 54.6211
+    dec_deg: -35.4507
+    radius_deg: 1.0
+    host_name: NGC 1399
+    host_distance_mpc: 20.0
+  control:
+    role: control
+    radius_deg: 1.0
+    # The centre is chosen by stage 0 and stored in stage_0_preflight/tables/fields.json.
+    selection:
+      minimum_separation_deg: 4.5
+      maximum_separation_deg: 9.0
+      grid_step_deg: 0.5
+      minimum_coverage_fraction: 0.99
+      maximum_galactic_latitude_difference_deg: 5.0
+      galaxy_exclusion_radius_deg: 1.5
+      avoid:
+        - {name: NGC 1316 (Fornax A), ra_deg: 50.6738, dec_deg: -37.2082, radius_deg: 3.0}
+        - {name: NGC 1365, ra_deg: 53.4015, dec_deg: -36.1404, radius_deg: 3.0}
+
+smoke_test:
+  radius_deg: 0.0833  # 5 arcmin
+
+ucd_definition:
+  minimum_half_light_radius_pc: 10.0
+  maximum_half_light_radius_pc: 100.0
+  maximum_absolute_v_magnitude: -10.0
+  distance_grid_mpc: [3, 5, 10, 20, 30, 50]
+
+budgets:
+  maximum_area_square_deg: 10.0
+  maximum_disk_gigabytes: 10.0
+  maximum_hours_before_new_stage: 9.0
