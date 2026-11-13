@@ -114,12 +114,36 @@
 - [x] Study bubbletea (method, assets, lessons); check Gaia DR4 (not public), DR1 coverage of UCD hosts
 - [x] Interview: fields, Gaia step, verification rule, UCD definition, grz source, public-data rule, git, failures
 - [x] Plan written; branch `ucd-search-pilot`
-- [ ] Stage 0: preflight, bubbletea snapshot, selector regression test, control field
-- [ ] Stage 1: resolution and detection limits (Gaia, Euclid)
-- [ ] Stage 2: Gaia retrieval and frozen-selector scoring
-- [ ] Stage 3: Euclid MER cross-match
-- [ ] Stage 4: Legacy Surveys DR11 South cross-match
-- [ ] Stage 5: contaminant rejection, cut flow, tiers
-- [ ] Stage 6: spatial distribution and background statistics
-- [ ] Stage 7: cutouts, colour composites, visual triage notes
-- [ ] Stage 8: report, workflow README, candidate-only ADQL, review section
+- [x] Stage 0: preflight, bubbletea snapshot, selector regression test, control field
+- [x] Stage 1: resolution and detection limits (Gaia, Euclid)
+- [x] Stage 2: Gaia retrieval and frozen-selector scoring
+- [x] Stage 3: Euclid MER cross-match
+- [x] Stage 4: Legacy Surveys DR11 South cross-match
+- [x] Stage 5: contaminant rejection, cut flow, tiers
+- [x] Stage 6: spatial distribution and background statistics
+- [x] Stage 7: cutouts, colour composites, visual triage notes
+- [x] Stage 8: report, workflow README, candidate-only ADQL, review section
+
+## Review (run `fornax_pilot_20261113`, finished 2026-11-14)
+
+- **Outcome:** all nine stages have a passing verdict (stages 3 and 4 on their first retry; the limits stage was
+  re-run once with a cleaner star sample). Workflow description: `ucd/README.md`; aggregate results and lessons:
+  `docs/ucd_pilot_run_log.md`; local report and all products: `~/data/euclid/bubbletea/runs/fornax_pilot_20261113/`.
+- **Numbers:** control field 478 -> 5.5 candidates per deg^2 (tier A); 38 of the 40 known Fornax UCDs with Gaia and
+  Euclid data recovered in tier A; 61 tier A objects within 16' of NGC 1399 against 1.2 expected; 26 tier A objects
+  not in the literature catalogue, 14 of them clean compact on the cutouts.
+- **Deviations from the plan:** listed in `docs/ucd_pilot_plan.md` section 8.
+- **Lessons:** `docs/lessons.md` (2026-11-14 entries) and `kb/data_model/verified_on_archive.md`.
+
+## Follow-ups (not started)
+
+- [ ] Decide whether the galaxy-sequence envelope becomes a cut (information column in the first run)
+- [ ] Own size measurement on VIS cutouts at the Gaia position (PSF-convolved King or Sersic fit); needed in the
+      catalogue hole, in the core of NGC 1399 and for nucleated dwarfs
+- [ ] Euclid colour criterion from a reference sample outside the target field
+- [ ] Second and third control fields for the field-to-field term
+- [ ] Validate `ucd/config/candidate_preselection.adql` on an independent field
+- [ ] Disc-galaxy field (NGC 1291 or NGC 1433) and group fields (Fornax A, Dorado)
+- [ ] Gaia excess noise versus angular size for Virgo objects (only a positional join so far); Gaia's upper size limit
+- [ ] Inspect the remaining contact sheets (known sheet 2, other known tier A, control tiers B and C)
+- [ ] Demo 08 and kb/09: note that tile-polygon MOCs overestimate coverage; build a catalogue-based coverage map

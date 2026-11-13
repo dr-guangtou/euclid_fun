@@ -67,7 +67,7 @@ def draw_sheet(config: dict, lookup: dict, rows: pd.DataFrame, index: pd.DataFra
     columns = 2
     lines = int(np.ceil(len(rows) / columns))
     figure, axes = plt.subplots(lines, columns * 4, figsize=(qa_plots.double_width, 0.95 * lines + 0.35), squeeze=False,
-                                gridspec_kw={"width_ratios": [1, 1, 1, 1.55] * columns})  # fmt: skip
+                                gridspec_kw={"width_ratios": [1, 1, 1, 2.2] * columns})  # fmt: skip
     for axis in axes.ravel():
         axis.set_axis_off()
     paths = index.set_index("label")
@@ -98,7 +98,7 @@ def draw_sheet(config: dict, lookup: dict, rows: pd.DataFrame, index: pd.DataFra
             rf"$r_{{\rm S}}={row.euclid_sersic_sersic_vis_radius:.2f}''$" + "\n"
             rf"$g-r={row.legacy_g_minus_r:.2f}$, $\epsilon={row.euclid_ellipticity:.2f}$, {row.legacy_type}"
         )
-        panels[3].text(0.02, 0.5, text, fontsize=5.6, va="center", ha="left", transform=panels[3].transAxes)
+        panels[3].text(0.0, 0.5, text, fontsize=4.7, va="center", ha="left", transform=panels[3].transAxes)
     figure.suptitle(title + r" \quad (VIS, Euclid $H$/$YJ$/VIS, Legacy $grz$; 12 arcsec)", fontsize=8, y=0.995)
     figure.subplots_adjust(
         left=0.005, right=0.995, top=1 - 0.3 / (0.95 * lines + 0.35), bottom=0.005, wspace=0.04, hspace=0.06

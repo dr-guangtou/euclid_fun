@@ -171,3 +171,61 @@ Cut flow (sources; Euclid-dependent steps use the covered area: fornax 2.05 deg2
 - Caveat: tier A is dominated by already known Fornax objects (38 confirmed UCDs, 25 other spectroscopic compact
   objects), so the excess mainly validates the method. 26 tier A objects are not in bubbletea's catalogue.
 - Significances are not corrected for the choice of annuli.
+
+## Stage 7 cutouts and visual triage: PASS (2/2 gates)
+
+- 182 objects in 27 tiles: all have four Euclid bands (12" cutouts on the 0.1" grid) and a Legacy DR11 grz image.
+  About 760 cutouts in 20 min with four parallel requests; the tile lookup (one archive query per tile) took 5 min.
+  The `ls-dr11-south` viewer layer returned normal images (bubbletea had seen dark DR11 layers earlier).
+- Eleven contact sheets: known confirmed (2), tier A not in the catalogue (2), tier A other known objects (2),
+  tier B, control tier A, control tier B (2), control tier C sample.
+- Visual notes by Claude (information only; tiers and ranks unchanged). Flags: clean_compact, uncertain,
+  galaxy_like, blend, near_bright_star, nucleated_dwarf.
+  - Known confirmed UCDs (first 24 inspected): 21 look alike: round, compact, soft halo in VIS, white to blue-white
+    in grz. One is a nucleus inside a diffuse dwarf (the MER entry is the whole galaxy), one is a galaxy with an
+    off-centre nucleus (fails the size cut), one is blended with red neighbours.
+  - Fornax tier A not in the catalogue (26): 14 clean compact, 3 uncertain, 4 galaxy-like, 3 blends, 2 next to a
+    bright star.
+  - Fornax tier B (22): all galaxy-like (discs, spirals or rings, smooth dwarfs or background ellipticals). The
+    large-size class adds no UCD-like object here.
+  - Control tier A (17): 12 galaxy-like, 2 blends, 3 clean compact. So about 1 clean compact object per deg2
+    survives everything in a field without a host.
+- Not inspected: second known sheet, other known tier A objects, control tier B and C sheets.
+- Lesson: the Euclid colour composite needs VIS smoothed to the NISP resolution, otherwise every compact core
+  turns blue.
+
+## Stage 8 synthesis: PASS (5/5 gates)
+
+- Every stage has a passing verdict (stages 3 and 4 on their first retry). Disk use 0.5 GB of the 10 GB budget;
+  sky area 6.3 deg2 of the 10 deg2 limit.
+- Gaia pre-selection for future runs (`ucd/config/candidate_preselection.adql`): G range, excess-noise significance
+  above 4, no parallax or proper motion above 5 sigma. In the two pilot fields it keeps 3,075 of 22,680 Gaia sources
+  (factor 7.4 fewer), 159 of 160 tier A or B candidates and all 56 known confirmed objects that pass the selector.
+  It must be validated on an independent field.
+- Local report: runs/fornax_pilot_20261113/report/index.html. Final candidate tables with the visual notes:
+  stage_8_report/tables/final_candidates_<field>.csv.
+
+## Overall assessment of the first run
+
+What works:
+- Gaia (frozen selector) + Euclid compactness + Legacy colour reduce the control-field density from 478 to 5.5 per
+  deg2 (tier A) and recover 38 of the 40 known Fornax UCDs that have Gaia and Euclid data.
+- The Gaia-to-Euclid displacement is a usable proper-motion test (0.65-0.85 mas/yr per axis) and removes faint
+  moving stars that have no Gaia proper motion.
+- The cluster signal is recovered blind to the known objects: 61 tier A objects within 16' of NGC 1399 against 1.2
+  expected.
+
+What limits the method:
+- Gaia detection, not Euclid resolution: at 20 Mpc the search stops near M_V ~ -10.5; only 64 of 165 known
+  confirmed objects in the field have a Gaia source.
+- Euclid catalogue coverage: 35% of the Fornax field and the core of NGC 1399 have no catalogue entries.
+- The residual contaminants are compact galaxies on the bright, large side of the allowed size range.
+
+Open questions for calibration (next sessions):
+1. Make the galaxy-sequence envelope a cut? It keeps 32 of 38 known objects and leaves 2 control objects in 1.5 deg2.
+2. Measure sizes directly on VIS cutouts at the Gaia position (PSF-convolved King fit) instead of using MER
+   compactness, especially where MER shreds or merges (nucleated dwarfs, the galaxy core, the catalogue hole).
+3. A Euclid colour criterion (I_E - Y, Y - H) needs a reference sample outside the target; tonight's known Fornax
+   objects could define it for other fields.
+4. Field-to-field variation of the background needs more than one control field.
+5. Validate the pre-selection query and run a disc-galaxy field (NGC 1291 or NGC 1433) and Fornax A / Dorado.
