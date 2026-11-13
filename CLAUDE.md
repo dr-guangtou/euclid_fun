@@ -23,6 +23,17 @@ redshift galaxies, including low-surface-brightness work).
 - The guide is public at https://dr-guangtou.github.io/euclid_fun/, built and deployed by
   `.github/workflows/pages.yml` on pushes to `main`. Write anything in `guide/src/` for a public audience.
 
+## UCD search sub-project (from the user, 2026-11-13)
+
+- Plan and source of truth: `docs/ucd_pilot_plan.md`; code in `ucd/`; sister project: `~/Dropbox/work/project/bubbletea`
+  (read-only: never modify it; use the snapshot in `~/data/euclid/bubbletea/reference/`).
+- All data, catalogues, cutouts and QA figures of this sub-project go to `~/data/euclid/bubbletea/`. Only code,
+  configuration, docs and compact files stay here.
+- This repository is public: never commit a table, figure or text that gives coordinates or identifiers of UCD
+  candidates or of known objects with our measurements. Docs report aggregate numbers only.
+- Known Fornax UCDs are for verification only; never tune a threshold on them.
+- Sky-area limit for a run: 10 deg^2 until the user raises it. Gaia DR4 is not public yet (checked 2026-11-13): use DR3.
+
 ## Figures
 
 - Publication quality, LaTeX fonts (`text.usetex=True`; a TeX install is available), PNG output.

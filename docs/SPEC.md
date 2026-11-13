@@ -27,6 +27,14 @@
 | `~/data/euclid/dr1_demo/` | Downloaded DR1 data (budget about 15 GB; ~12 GB used): tiles, cutouts, catalogues, one NIR frame (`frames/`), VMPZ samples (`vmpz/`), footprint MOCs (`footprint/`) |
 | `~/data/euclid/hats_cache/` | Saved LSDB/HATS query results and the HATS-derived MOC (tens of MB) |
 
+## Sub-project: UCD candidate search (Gaia + Euclid DR1 + Legacy Surveys)
+
+Started 2026-11-13 on branch `ucd-search-pilot`. Architecture, stages, gates and decisions are in
+[ucd_pilot_plan.md](ucd_pilot_plan.md). Code lives in `ucd/` (`config/`, `lib/`, `stages/`); all products live in
+`~/data/euclid/bubbletea/` (`reference/` = hashed snapshot of bubbletea inputs; `runs/<run_id>/stage_N_*/` with
+`tables/`, `figures/`, `summary.json`). Each stage ends with a gate; the next stage reads the previous verdicts.
+Git holds no object-level tables or figures (public repository).
+
 ## Search
 
 `scripts/kb_search.py` builds an SQLite FTS5 index (`kb/kb_index.sqlite`) over:

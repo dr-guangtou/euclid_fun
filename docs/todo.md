@@ -108,3 +108,18 @@
 ## Review
 
 - Not verified yet: the workflow itself (it has not run on GitHub; Pages must be enabled first).
+
+# TODO: UCD search pilot, Fornax (2026-11-13; plan in docs/ucd_pilot_plan.md)
+
+- [x] Study bubbletea (method, assets, lessons); check Gaia DR4 (not public), DR1 coverage of UCD hosts
+- [x] Interview: fields, Gaia step, verification rule, UCD definition, grz source, public-data rule, git, failures
+- [x] Plan written; branch `ucd-search-pilot`
+- [ ] Stage 0: preflight, bubbletea snapshot, selector regression test, control field
+- [ ] Stage 1: resolution and detection limits (Gaia, Euclid)
+- [ ] Stage 2: Gaia retrieval and frozen-selector scoring
+- [ ] Stage 3: Euclid MER cross-match
+- [ ] Stage 4: Legacy Surveys DR11 South cross-match
+- [ ] Stage 5: contaminant rejection, cut flow, tiers
+- [ ] Stage 6: spatial distribution and background statistics
+- [ ] Stage 7: cutouts, colour composites, visual triage notes
+- [ ] Stage 8: report, workflow README, candidate-only ADQL, review section
