@@ -90,4 +90,5 @@ Euclid DR1 data are provided by ESA and the Euclid Consortium under
 knowledge base lists them in [kb/papers/](kb/papers/). The notes in this repository are summaries written for this
 project and are not official ESA or Euclid Consortium documents.
 
-A licence for this repository's code and notes has not been chosen yet.
+The code and notes in this repository are released under the [MIT licence](LICENSE). The figures in `figures/` are
+made from Euclid data, so they follow the ESA data licence above (CC BY-NC 3.0 IGO), not the MIT licence.

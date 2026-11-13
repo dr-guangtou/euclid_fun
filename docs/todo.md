@@ -90,5 +90,7 @@
 
 - The repository is public. The scan found no credentials, e-mail addresses or archive error text in tracked files.
   `kb/kb_index.sqlite` is excluded because it holds the full text of the archived papers.
-- Open: choose a licence for the code and notes; decide whether to publish the guide with GitHub Pages, which would
-  need a build step because `guide/site/` is not tracked.
+- Licence: MIT for code and notes (`LICENSE`, branch `add-mit-license`); figures made from Euclid data follow
+  ESA's CC BY-NC 3.0 IGO.
+- Open: decide whether to publish the guide with GitHub Pages, which would need a build step because `guide/site/` is
+  not tracked.
