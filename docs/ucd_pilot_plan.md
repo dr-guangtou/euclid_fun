@@ -1,6 +1,7 @@
 # Plan: UCD candidate search with Gaia + Euclid DR1 + Legacy Surveys (Fornax pilot)
 
-Status: **plan approved on 2026-11-13 with three review comments (section 3.1); run started the same day.** This file is the source of truth for the
+Status: **first run finished on 2026-11-14** (run id `fornax_pilot_20261113`). Results, problems and lessons per
+stage: [ucd_pilot_run_log.md](ucd_pilot_run_log.md). Deviations from this plan are listed in section 8. This file is the source of truth for the
 overnight run. After any interruption or context loss, read this file and the run log first
 (`~/data/euclid/bubbletea/runs/<run_id>/run_log.md`), then continue with the first stage that has no passed gate.
 
@@ -244,3 +245,19 @@ Each stage lists its goal, method, QA figures and gate (pass criteria). Numbers 
 - Legacy DR11 identifiers differ from DR10, and bubbletea saw dark DR11 cutout layers; cutouts fall back to DR10.
 - Cluster environment: the 1 deg field lies inside the virial radius, so the control field, not an outer annulus,
   sets the background.
+
+## 8. Deviations from the plan in the first run (2026-11-14)
+
+- **Stage order:** 0, 2, 3, 4, 1, 5, 6, 7, 8. The limits study needs the Gaia and Euclid tables of the control field.
+- **Gaia source:** NOIRLab Data Lab copy of Gaia DR3 instead of the ESA archive (rate limit).
+- **Coverage:** defined from the MER catalogue, not from the tile-polygon MOC, which overestimates it (65% instead
+  of 94% of the Fornax field). The usable target area is 2.05 deg^2.
+- **Epoch difference:** 9.06 yr (fitted per tile), not about 8.6 yr.
+- **Radii and thresholds** (Euclid match 0.7", Legacy fallback 0.7", displacement 4 sigma) are calibrated inside the
+  stages from displaced positions and stars; three stages failed their first attempt before this was done.
+- **Legacy match:** by Tractor's Gaia reference id, positional only as a fallback.
+- **Tiers:** four (A to D) instead of three; tier A is limited to the 95th percentile of reference UCD sizes.
+- **Added:** galaxy-sequence envelope as an information column (defined on one half of the control field, evaluated
+  on the other).
+- **Not done:** Euclid colour cut (no reference sample outside Fornax); Gaia's upper size limit; Voggel-style
+  comparison is empty at 20 Mpc (needs G < 19); DR10 comparison only for known objects.

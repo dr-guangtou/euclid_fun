@@ -35,6 +35,10 @@ Started 2026-11-13 on branch `ucd-search-pilot`. Architecture, stages, gates and
 `tables/`, `figures/`, `summary.json`). Each stage ends with a gate; the next stage reads the previous verdicts.
 Git holds no object-level tables or figures (public repository).
 
+First run `fornax_pilot_20261113` finished 2026-11-14: workflow description in `ucd/README.md`, aggregate results in
+[ucd_pilot_run_log.md](ucd_pilot_run_log.md), local report in `~/data/euclid/bubbletea/runs/<run_id>/report/index.html`.
+Gaia comes from the NOIRLab Data Lab copy; Euclid coverage is defined from the catalogue.
+
 ## Search
 
 `scripts/kb_search.py` builds an SQLite FTS5 index (`kb/kb_index.sqlite`) over:

@@ -97,3 +97,13 @@ Severity for extended-galaxy work: **H** high, **M** medium, **L** low.
 - Decontamination dates differ slightly between papers (e.g. 2024-03-14 vs 03-12/21, 2024-06-08 vs 06-12; one typo
   "2026-06-08" in Schirmer+26 spacecraft).
 - Holloway+26 quotes lens completeness 0.73/0.34 vs Lines+26 0.81/0.43.
+
+## Added 2026-11-14 (UCD pilot)
+
+- **A tile can have mosaics but no catalogue rows.** Example: tile 102035564 next to NGC 1399. Footprints built from
+  tile polygons (including the MOCs of demo 08) are upper limits; test coverage with the catalogue itself. Details:
+  [verified_on_archive.md](data_model/verified_on_archive.md).
+- **No catalogue entries in the core of a giant elliptical** (about 1.5 arcmin around NGC 1399), in addition to the
+  shredding of large galaxies described above.
+- **Multi-table cone joins are very slow** on the Euclid TAP; fetch the catalogue by cone and the rest by id lists.
+- **ESA Gaia archive rate limit** (HTTP 429) for anonymous bulk queries; use the NOIRLab Data Lab copy.

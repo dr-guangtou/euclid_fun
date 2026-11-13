@@ -55,3 +55,19 @@ Record mistakes and the rationale for fixes here. Review at session start.
   before concluding that a product is too big.
 - 2026-11-13: the archive's per-detector table (`dr1.calibrated_detectors`) looked like the way to locate detectors
   but is unusable (NIR only, one shared `crval`); a focal-plane model from one exposure's headers works for all.
+- 2026-11-14 (UCD pilot): **tile polygons are not coverage.** The tile-polygon MOC said the Fornax field was 94%
+  covered; the MER catalogue has entries in only 65% of it (one tile has mosaics but zero catalogue rows). Define
+  coverage from the catalogue (an entry within 20") and check the area with two independent estimates.
+- 2026-11-14: the ESA Gaia archive rate-limits anonymous clients (HTTP 429 after about ten queries, no Retry-After),
+  and pyvo then waits silently. Use the NOIRLab Data Lab copy for bulk Gaia work and keep ESA as a fallback.
+- 2026-11-14: Data Lab returns `source_id` in a masked column that pandas turns into a float; take 64-bit ids from the
+  astropy table. The same holds for `object_id`, `gaia_id`, `parent_id` from the Euclid TAP.
+- 2026-11-14: a cone query that joins three or four Euclid DR1 tables did not finish in 6 min for a 5 arcmin cone.
+  Query the catalogue by cone, then the other tables by `object_id IN (...)` lists (1000 ids, about 6 s).
+- 2026-11-14: fix a radius or a threshold by measuring it on controls inside the stage (displaced positions, stars),
+  not by guessing and not by loosening the gate. Three stages failed their first attempt for this reason.
+- 2026-11-14: a null sample must be clean. The displacement test looked bad (20% false flags) until the non-moving
+  sample was restricted to compact sources; for galaxies the Gaia and Euclid centroids simply differ.
+- 2026-11-14: `# fmt: skip` blocks escape the formatter but not the line-length rule; a failed pre-commit hook
+  aborts the commit silently if its output is filtered. Check `git log` after committing.
+- 2026-11-14: do not print whole schema files or long linter output into the session; grep for what is needed.

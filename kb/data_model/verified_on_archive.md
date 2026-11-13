@@ -132,3 +132,18 @@ Conversions: `m_AB = MAGZERO - 2.5 log10(pixel)`, `mu = MAGZERO - 5 - 2.5 log10(
   VIS `QUALITY_PARAMETERS` is a 0.5 MB JSON.
 - A 1' row-range cutout of `EUC_MER_BGMOD-VIS_TILE102021980` (46 MB, 26 s) is identical to the same region of the
   downloaded tile.
+
+## Checked on 2026-11-14 during the UCD pilot (Fornax wide field and a control field, 1 deg radius each)
+
+| Topic | Verified fact |
+|---|---|
+| Coverage | Tile `102035564` has VIS, Y, J, H mosaics but **no rows** in `dr1.mer_catalogue_wide_survey` (0 entries in a 3 arcmin cone that has a mosaic). The tile-polygon MOC therefore overestimates usable area: 94% versus 65% for the 1 deg field around NGC 1399. The catalogue is also empty within about 1.5 arcmin of the centre of NGC 1399 |
+| Query cost | Catalogue cone, 59 columns, `flux_detection_total > 0.912`: 305k rows for 1 deg radius in 4.5 min (8 declination strips). Rows by `object_id IN (1000 ids)`: about 6 s per table. A cone query with three LEFT JOINs (morphology, PHZ classification, photo-z) did not finish in 6 min for 5 arcmin |
+| `gaia_id` | Agrees with an independent positional match (Gaia propagated to the Euclid epoch, 0.7 arcsec) for 97.8% of matched sources in both fields |
+| Astrometry versus Gaia | Per-tile fit of Euclid minus Gaia 2016.0 positions against Gaia proper motions: time baseline 8.99-9.12 yr (Euclid epoch about 2025.06 for these tiles), frame offsets up to 6.6 mas, residual scatter 5.7-6 mas per axis for G < 19.5 (a floor, independent of magnitude), 7.7 mas at G ~ 20.6. The displacement recovers 99% of stars expected to move by > 5 sigma at a 4 sigma threshold |
+| Star-galaxy separation | Clean single stars (Gaia motion > 5 sigma, RUWE < 1.4): `mumax_minus_mag` median -2.97, scatter 0.12 mag, 99% quantile at -2.64 to -2.71 for 17.5 < I_E < 21. Compact stellar systems at 20 Mpc lie at -2.7 to -1.2, background galaxies on a separate sequence |
+| `det_quality_flag` of stars | Most Gaia stars with I_E < 18.5 carry star-mask bits (128, 256) and often the blend bit (2); requiring flag = 0 removes nearly all bright stars |
+| Simulated size shift | Empirical VIS PSF (24 stacked stars): `mu_max - mag` shifts by 0.36 mag for a King profile with r_h = 0.05 arcsec, 0.73 at 0.10, 1.32 at 0.20, 3.6 at 1.0 arcsec. Smallest size separated from 99% of stars: about 0.04 arcsec |
+| Gaia completeness versus I_E | 50% of clean isolated MER sources have a Gaia DR3 source at I_E = 20.8 (point-like), 20.7 (marginally resolved), 19.7 (resolved). Gaia G is 0.5-1.4 mag fainter than Kron I_E for resolved compact sources |
+| DECam aperture fluxes | Legacy Surveys DR11 total minus MER `flux_<band>_ext_decam_2fwhm_aper` for stars: -0.27, -0.26, -0.26, -0.25 mag in g, r, i, z (scatter 0.016): a constant aperture loss, colours agree |
+| PHZ classes for compact stellar systems | Known Fornax UCDs and globular clusters are classed as galaxies with photo-z about 0.2 and `phz_glob_cl_prob` = 0 |

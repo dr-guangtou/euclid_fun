@@ -37,3 +37,7 @@ target-version = "py312"
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "N", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+# HTML and ADQL templates are clearer as single long lines.
+"ucd/stages/stage_8_report.py" = ["E501"]

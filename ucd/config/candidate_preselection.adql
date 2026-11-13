@@ -1,0 +1,12 @@
+-- Gaia pre-selection of UCD-like sources (pilot: fornax_pilot_20261113).
+-- Keeps 94.8% of the sources that pass bubbletea's frozen selector in the two pilot
+-- fields and 3075 of 22680 Gaia sources overall. The frozen selector is then applied
+-- locally to the result. Replace the cone by the region of interest. Syntax: q3c (https://datalab.noirlab.edu/tap).
+SELECT *
+FROM gaia_dr3.gaia_source
+WHERE 't' = Q3C_RADIAL_QUERY(ra, dec, <ra_deg>, <dec_deg>, <radius_deg>)
+  AND phot_g_mean_mag BETWEEN 11.26291847229004 AND 21.75798797607422
+  AND astrometric_excess_noise_sig > 4.0
+  AND (parallax IS NULL OR parallax < 5 * parallax_error)
+  AND (pmra IS NULL
+       OR (pmra * pmra) / (pmra_error * pmra_error) + (pmdec * pmdec) / (pmdec_error * pmdec_error) < 50)
