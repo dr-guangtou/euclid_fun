@@ -1,0 +1,89 @@
+<!-- title: Low surface brightness
+     description: Where the sky is removed, what to use, limits, the ICL team's recipe and its data cost -->
+<section id="lsb">
+<h2>Low surface brightness</h2>
+<h3>Where the sky is removed</h3>
+<div class="flow">
+  <div class="step lost"><b>1. VIS per exposure</b>NoiseChisel per CCD quadrant (3.4&prime;); over-subtracts inside objects larger than a quadrant. <span class="tag kept">BKG map stored</span></div>
+  <div class="arrow">&rarr;</div>
+  <div class="step lost"><b>1&prime;. NIR per exposure</b>NoiseChisel per detector (10&times;10 px tiles); 1/f stripes, persistence masks. <span class="tag kept">BKG map stored</span></div>
+  <div class="arrow">&rarr;</div>
+  <div class="step lost"><b>2. Co-add</b>MER mosaics are built from <i>background-subtracted</i> exposures (bilinear, median). <span class="tag lost">not undoable from the mosaic</span></div>
+  <div class="arrow">&rarr;</div>
+  <div class="step kept"><b>3. MER sky</b>256-px (25.6&Prime;) mesh, 3-cell (77&Prime;) median filter, sources masked. <span class="tag kept">BGMOD: add back</span></div>
+</div>
+<div class="tablewrap"><table>
+<tr><th>Target size / goal</th><th>Use</th></tr>
+<tr><td>&lt; 10&Prime; (most z &gt; 0.1 galaxies)</td><td>MER BGSUB cutouts + MER PSF; fit a residual sky</td></tr>
+<tr><td>10&Prime;&ndash;1&prime;, VIS profiles to ~27&ndash;28 mag/arcsec&sup2;</td><td>BGSUB + BGMOD (full-tile download) and your own sky well outside the galaxy</td></tr>
+<tr><td>&gt; 1&prime;, haloes, tidal features, ICL, any NIR outskirts</td><td>rebuild from calibrated frames: atemporal background, NIR row/column and persistence fixes, per-detector background matching, clipped-mean co-add, then one large-scale sky (Bamford+26 recipe, <code>nicl</code> code)</td></tr>
+</table></div>
+<figure>
+  <img alt="NGC 1483 background-model test" src="{{figure:dr1_lsb_ngc1483.png}}">
+  <figcaption>NGC 1483 in the wide tile (1 visit) and the EDF-South deep stack (10 visits). (a) Deep I<sub>E</sub> with
+  BGMOD restored and our own sky (3&prime;&ndash;4&prime; annulus, dashed). (b, c) The MER background model has a
+  positive bump on the galaxy. (d, e) Elliptical profiles: delivered (dotted) versus restored (solid); dash-dot lines
+  are the measured 3&sigma; limits in 10&Prime;&times;10&Prime; boxes. (f) Fraction of light removed by the MER step:
+  ~40% (deep) to ~65% (wide) in I<sub>E</sub> at a semi-major axis of ~100&Prime;. Script:
+  <code>demo/05_lsb_background.py</code>.</figcaption>
+</figure>
+<div class="tablewrap"><table>
+<tr><th>3&sigma; limit, 10&Prime;&times;10&Prime; [mag arcsec<sup>&minus;2</sup>]</th><th>wide (1 visit)</th><th>deep (10 visits)</th><th>naive pixel-RMS extrapolation (wide / deep)</th></tr>
+<tr><td>I<sub>E</sub></td><td>28.2</td><td>29.0</td><td>29.8 / 31.0</td></tr>
+<tr><td>H<sub>E</sub></td><td>27.0</td><td>27.9</td><td>29.6 / 30.7</td></tr>
+</table></div>
+<div class="callout"><b>Published references</b>Q1 cluster-team processing: 27.8 (I<sub>E</sub>) and 26.4 (YJH) in
+10&Prime;&times;10&Prime; boxes, about 29 / 27.5 on arcminute scales. Never extrapolate pixel noise with 1/&radic;N: it is
+1.5&ndash;2.8 mag too optimistic.</div>
+<h3>Contaminants of faint light</h3>
+<ul>
+<li>VIS stray light (10&ndash;15% of zodiacal light, depends on attitude and detector region, +14%/yr); zodiacal gradients; Galactic cirrus (EDF-N limits 0.2&ndash;0.4 mag brighter than EDF-S/F).</li>
+<li>VIS dichroic ghost ~70&Prime; from stars with G &lt;~ 14 (only flagged); NIR ghosts and ~1.7&prime; arcs around stars brighter than ~11 mag; unmodelled internal-reflection arcs.</li>
+<li>NIR persistence (masked, ~5% of pixels), persistence-like background structure, 1/f row/column stripes, detector offsets.</li>
+<li>Small PSF models (VIS 2.1&Prime;, NIR &le; 4.5&Prime; stamps): no extended wings. Build your own from stars, or use the ERO extended PSF.</li>
+<li>Bright-star masks cover cores and spikes only; the VMPZ effective coverage deliberately masks bright SGA galaxies.</li>
+</ul>
+<h3>Lessons from the Euclid cluster/ICL team</h3>
+<ul>
+<li>Subtract one sky on a scale of several times the object (1 Mpc boxes for clusters). Mask in two zones (+50% outside, +25% inside the diffuse region), and protect the target with an adaptive-smoothing mask.</li>
+<li>Use elliptical annuli with sigma-clipped medians (AutoProf, regularised shapes). Estimate errors from random blank-sky apertures plus mock injection into real Euclid sky.</li>
+<li>H<sub>E</sub> (or summed YJH) reaches furthest at z &gt; 0.2; I<sub>E</sub> wins at z &lt; 0.2; Y<sub>E</sub> is the noisiest.</li>
+<li>Masks bias measured shapes (mask-defined diffuse light is more elliptical), so forward-model your selection.</li>
+</ul>
+<h3>Reproducing the ICL team's processing (Bamford et al.) with public DR1</h3>
+<p>Every input is public and downloads anonymously (checked 2026-11-13):</p>
+<ul>
+<li>VIS calibrated frames with <code>BKG</code>/<code>WGT</code> (42,092);</li>
+<li>NIR calibrated frames with <code>BKG</code> (71,659);</li>
+<li>NISP spectroscopic frames for the persistence model (26,581);</li>
+<li>LE1 raw frames (201,082);</li>
+<li>exposure times (<code>start_time_mjd</code>, <code>MJD-OBS</code>).</li>
+</ul>
+<p>One NIR H frame is 0.8&nbsp;GB (49 HDUs, electrons, sky ~65&nbsp;e<sup>&minus;</sup> still in <code>SCI</code>), and
+its <code>BKG</code> file is another 0.8&nbsp;GB. The Q1 test cluster now has 13 DR1 observations. The team's code
+(<code>github.com/IntraClusterLight/nicl_q1</code>, Apache-2.0) is a Q1 snapshot. Its "DR1" mode points to the
+Consortium-internal archive (<code>easidr</code>, <code>sedm</code> schema), so switch it to
+<code>eas.esac.esa.int</code>, the <code>dr1.</code> tables and <code>release=dr1</code>. For a cluster-sized field,
+whole files of the neighbouring exposures come to ~300&nbsp;GB of VIS and ~40&nbsp;GB per NIR band, which makes ESA
+Datalabs the practical place to run it. For a single galaxy, see the next table. The Euclid cluster
+catalogue they used comes only with full DR1, so use eRASS1, redMaPPer, SPT or ACT clusters.</p>
+<h3 id="volume">How much data for one galaxy?</h3>
+<p>Measured for ESO&nbsp;248-G006, the BCG of Abell&nbsp;3112 (z&nbsp;=&nbsp;0.075, 1&prime;&nbsp;&asymp;&nbsp;86&nbsp;kpc;
+one observation of 4 dithers), with partial reads of the calibrated frames:</p>
+<div class="tablewrap"><table>
+<tr><th>Processing level (VIS + Y + J + H)</th><th>Units fetched</th><th>Volume</th><th>Whole files</th></tr>
+<tr><td><b>A.</b> 1&prime;&times;1&prime; science region; own sky from a local annulus</td><td>6 VIS quadrants + 4 NIR detectors per band</td><td><b>0.9&nbsp;GB</b> (+0.7&nbsp;GB pipeline BKG); measured 295&nbsp;s</td><td>39&nbsp;GB</td></tr>
+<tr><td><b>B.</b> 9&prime;&times;9&prime; field: background matching, one large-scale sky on 3&prime; boxes</td><td>39 VIS quadrants + 11 NIR detectors per band</td><td><b>3.6&nbsp;GB</b>; ~20&nbsp;min</td><td>39&nbsp;GB</td></tr>
+<tr><td><b>C.</b> Full Bamford recipe: B + atemporal background (10 VIS / 6 NIR neighbouring observations) + NIR persistence</td><td>same unit indices in neighbouring and time-adjacent exposures, plus SIR frames</td><td><b>~54&nbsp;GB</b> (43&nbsp;GB of it atemporal); ~4&nbsp;h</td><td>~350&nbsp;GB</td></tr>
+</table></div>
+<p>The ~300&nbsp;GB figure applies to cluster-sized fields that fill the focal plane, as in Bamford et&nbsp;al.
+For a ~1&prime; galaxy:</p>
+<ul>
+<li><b>VIS:</b> the MER mosaic with BGMOD restored is adequate up to ~1&prime; (Bamford et&nbsp;al.). Use the cutout
+service for BGSUB and a row-range read for BGMOD.</li>
+<li><b>NIR:</b> take level A or B from the frames, whose <code>SCI</code> still contains the sky. Co-add the dithers
+and fit one large-scale sky.</li>
+<li><b>Atemporal model:</b> it describes the detectors, not the target. Compute it once per period and sky region
+(e.g. in Datalabs) and reuse it for all your galaxies.</li>
+</ul>
+</section>

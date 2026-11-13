@@ -1,0 +1,32 @@
+<!-- title: Known issues and resources
+     description: The top traps, links, acknowledgement text -->
+<section id="issues">
+<h2>Top known issues</h2>
+<ol>
+<li>LSB light is filtered out at the MER stage; per-exposure skies are baked into mosaics and stacks.</li>
+<li>Large galaxies are shredded (NGC 1483: +58% entries around it in the wide catalogue, +75% in the deep), and no column isolates the fragments (see <a href="#fragments">above</a>). There are no special tiles for objects larger than 2&prime;, and tile-edge truncation is possible.</li>
+<li>Disk+S&eacute;rsic and <code>t_type</code> columns are empty; S&eacute;rsic values in bands without data are initial guesses (helpdesk cleaning script).</li>
+<li><code>FLUX_RADIUS</code> is limited to the segmentation area (biased low).</li>
+<li>MER PSF stamps are small and not renormalised (I<sub>E</sub> stamp sum ~0.96).</li>
+<li>T-PHOT bugs (recentring sign; numpy/FITS axis swap) mainly affect point sources.</li>
+<li><code>phz_classification</code> codes are swapped in the TAP description (1&nbsp;=&nbsp;star, 2&nbsp;=&nbsp;galaxy).</li>
+<li>Mosaic footprints can be larger than the data; a few tiles have duplicate mosaics.</li>
+<li>astroquery PyPI 0.4.11 is not DR1-ready; <code>sedm</code> defaults return HTTP 401; SIA had no DR1 on release day.</li>
+<li>NIR astrometry is off by &gt; 50 mas in 0.7% of the area; Pan-STARRS EXT flags were mishandled; avoid HSC r/i in favour of r2/i2.</li>
+</ol>
+</section>
+
+<section id="resources">
+<h2>Resources and citing</h2>
+<ul>
+<li>Euclid Data Space (archive GUI, ESASky, Datalabs): <a href="https://euclid.dataspace.esa.int/">euclid.dataspace.esa.int</a>; DR1 pages: <a href="https://www.cosmos.esa.int/web/euclid/euclid-dr1">cosmos.esa.int/web/euclid/euclid-dr1</a></li>
+<li>Explanatory Supplement: <a href="https://euclid.esac.esa.int/dr/dr1/expsup/">euclid.esac.esa.int/dr/dr1/expsup</a>; DPDD: <a href="https://euclid.esac.esa.int/dr/dr1/dpdd/">euclid.esac.esa.int/dr/dr1/dpdd</a></li>
+<li>DR1 papers (A&amp;A Special Issue, Nov 2026): <a href="https://eceb.astro.uni-bonn.de/public/">eceb.astro.uni-bonn.de/public</a>; astroquery docs: <a href="https://github.com/astropy/astroquery/blob/main/docs/esa/euclid/euclid.rst">euclid.rst on GitHub</a></li>
+<li>ICL/LSB processing code (Q1): <a href="https://github.com/IntraClusterLight/nicl_q1">github.com/IntraClusterLight/nicl_q1</a>; contributed notebooks: <a href="https://github.com/esa/euclid-contributed-jupyter-notebooks">esa/euclid-contributed-jupyter-notebooks</a></li>
+<li>Helpdesk: <a href="https://support.cosmos.esa.int/euclid">support.cosmos.esa.int/euclid</a></li>
+<li>Local knowledge base: <code>kb/00_index.md</code>; search with <code>uv run python scripts/kb_search.py "query"</code></li>
+</ul>
+<div class="callout good"><b>Acknowledgement text</b>"This work has made use of data from the European Space Agency (ESA)
+mission Euclid (https://www.cosmos.esa.int/euclid), processed by the Euclid Consortium (https://www.euclid-ec.org/)."
+DR1 DOI: 10.57780/esa-d079c51. Licence: CC BY-NC 3.0 IGO. Cite the DR1 papers for the products you use.</div>
+</section>

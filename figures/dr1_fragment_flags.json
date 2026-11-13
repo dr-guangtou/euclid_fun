@@ -1,0 +1,124 @@
+{
+  "wide": {
+    "main_pieces": 6,
+    "main_piece_magnitudes": [
+      12.78,
+      14.33,
+      15.51,
+      16.8,
+      17.83,
+      18.74
+    ],
+    "zone_fraction_with_parent": 0.21717877094972068,
+    "zone_fraction_quality_bit_512": 1.0,
+    "null_fraction": {
+      "blended_prob": 1.0,
+      "extended_prob": 1.0,
+      "spurious_prob": 0.0
+    },
+    "indicators": {
+      "_zone": {
+        "entries": 1432,
+        "expected_real": 906.8181818181818,
+        "excess": 525.1818181818182
+      },
+      "spurious_prob_above_0.7": {
+        "field_fraction": 0.026485568760611207,
+        "excess_fraction": 0.22845879377062542
+      },
+      "spurious_flag": {
+        "field_fraction": 0.0465874363327674,
+        "excess_fraction": 0.3232283750355972
+      },
+      "nir_only": {
+        "field_fraction": 0.21901528013582344,
+        "excess_fraction": 0.5681707773316879
+      },
+      "deblended_flag": {
+        "field_fraction": 0.14899830220713073,
+        "excess_fraction": 0.3349042644078018
+      },
+      "spurious_prob_above_0.7_or_nir_only": {
+        "field_fraction": 0.24319185059422752,
+        "excess_fraction": 0.7625344106495725
+      }
+    }
+  },
+  "deep": {
+    "main_pieces": 38,
+    "main_piece_magnitudes": [
+      13.07,
+      14.94,
+      14.98,
+      15.15,
+      15.41,
+      15.63,
+      17.18,
+      17.67,
+      17.95,
+      18.77,
+      19.41,
+      19.49,
+      19.54,
+      19.73,
+      19.76,
+      19.92,
+      20.03,
+      20.06,
+      20.08,
+      20.14,
+      20.32,
+      20.78,
+      20.8,
+      20.94,
+      20.96,
+      21.12,
+      21.31,
+      21.37,
+      21.38,
+      21.41,
+      21.73,
+      21.82,
+      22.09,
+      22.2,
+      23.32,
+      23.83,
+      24.67,
+      25.1
+    ],
+    "zone_fraction_with_parent": 0.2775678461009962,
+    "zone_fraction_quality_bit_512": 0.0,
+    "null_fraction": {
+      "blended_prob": 1.0,
+      "extended_prob": 1.0,
+      "spurious_prob": 0.0
+    },
+    "indicators": {
+      "_zone": {
+        "entries": 2911,
+        "expected_real": 1667.190615835777,
+        "excess": 1243.809384164223
+      },
+      "spurious_prob_above_0.7": {
+        "field_fraction": 0.024638002364066193,
+        "excess_fraction": 0.2491730305395165
+      },
+      "spurious_flag": {
+        "field_fraction": 0.07273197399527187,
+        "excess_fraction": 0.44921829871810887
+      },
+      "nir_only": {
+        "field_fraction": 0.11114804964539007,
+        "excess_fraction": 0.2441652382827328
+      },
+      "deblended_flag": {
+        "field_fraction": 0.180149231678487,
+        "excess_fraction": 0.4081468575160501
+      },
+      "spurious_prob_above_0.7_or_nir_only": {
+        "field_fraction": 0.13404994089834515,
+        "excess_fraction": 0.4868215372790523
+      }
+    }
+  }
+}

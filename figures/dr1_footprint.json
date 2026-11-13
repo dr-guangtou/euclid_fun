@@ -1,0 +1,13 @@
+{
+  "wide": {
+    "tiles": 8975,
+    "moc_order": 13,
+    "area_deg2": 2235.427632036584
+  },
+  "deep": {
+    "tiles": 1368,
+    "moc_order": 13,
+    "area_deg2": 86.85270256135507
+  },
+  "wide_or_deep_area_deg2": 2273.3282663636205
+}

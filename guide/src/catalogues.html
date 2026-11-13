@@ -1,0 +1,56 @@
+<!-- title: Catalogues for galaxies
+     description: Which columns to use, shredding, and whether an entry is real -->
+<section id="catalogue">
+<h2>Catalogues for galaxy work</h2>
+<div class="tablewrap"><table>
+<tr><th>Need</th><th>Column(s)</th><th>Caveat</th></tr>
+<tr><td>total flux of a galaxy</td><td><code>flux_detection_total</code> (Kron, detection band); <code>flux_&lt;band&gt;_sersic</code></td><td>sky-limited for large galaxies; Sersic flux uses non-renormalised 2&Prime;-scale PSFs</td></tr>
+<tr><td>colours</td><td><code>flux_&lt;band&gt;_&lt;n&gt;fwhm_aper</code> (PSF-matched to the worst PSF), template fits <code>*_templfit</code></td><td>aperture colours, not totals; T-PHOT bugs mostly affect point sources</td></tr>
+<tr><td>structure</td><td><code>sersic_sersic_vis_{radius [arcsec], index, axis_ratio}</code>, <code>sersic_visnir_flags</code></td><td>n piles up at the limit 8; versus HST, R<sub>e</sub> scatter ~16% and n is unreliable at I<sub>E</sub>~24; use I<sub>E</sub> &lt; 23</td></tr>
+<tr><td>bulge/disc</td><td><code>disk_sersic_*</code></td><td><b>empty (NaN) in DR1</b>: fit it yourself</td></tr>
+<tr><td>visual-like morphology</td><td>Zoobot vote fractions (<code>smooth_or_featured_*</code>, <code>bar_*</code>, <code>has_spiral_arms_*</code>, <code>disk_edge_on_*</code>, <code>merging_*</code>, <code>ring_*</code>, <code>dwarf_*</code>), CAS, Gini, M20</td><td>Zoobot only for I<sub>E</sub> &lt; 21 or area &gt; 700 px; <code>t_type</code> empty</td></tr>
+<tr><td>sizes</td><td><code>flux_radius</code> (pixels)</td><td>restricted to the segmentation area in DR1: biased low</td></tr>
+<tr><td>clean galaxies</td><td><code>phz_classification = 2</code>, <code>spurious_prob &lt; 0.7</code>, <code>det_quality_flag = 0</code>, <code>point_like_prob &lt; 0.96</code></td><td><code>det_quality_flag</code> bit 512 = "inside an extended-object area": set for practically every fragment of a large nearby galaxy (NGC 1483), so cuts on <code>det_quality_flag</code> silently drop such galaxies. Use the bit to find them and re-measure from the mosaic.</td></tr>
+</table></div>
+<figure>
+  <img alt="Catalogue demo with shredding of NGC 1483 and structural parameters" src="{{figure:dr1_catalog_demo.png}}">
+  <figcaption>(a) MER entries around NGC 1483. The galaxy body is split into 6 large deblended entries (one
+  <code>parent_id</code>), and its faint outer disc (40&Prime;&ndash;70&Prime;) produces 760 entries where the field
+  density predicts 356 (see <a href="#fragments">Is this entry real?</a>). (b) VIS S&eacute;rsic R<sub>e</sub> versus n for clean galaxies with
+  I<sub>E</sub>&nbsp;&lt;&nbsp;22 in the same tile (note the pile-up at n&nbsp;=&nbsp;8). (c) Photo-z versus I<sub>E</sub>.
+  (d) PHZ stellar mass versus photo-z for <code>phys_param_flags = 0</code>; this cut removes almost all galaxies brighter than I<sub>E</sub>&nbsp;=&nbsp;18, so bright low-z galaxies are under-represented. Script: <code>demo/03_catalog_demo.py</code>.</figcaption>
+</figure>
+</section>
+
+<section id="fragments">
+<h2>Is this catalogue entry real? (fragments of large galaxies)</h2>
+<p>There is <b>no fragment flag</b>, and <code>blended_prob</code>, <code>extended_prob</code>,
+<code>extended_flag</code> and <code>she_flag</code> are empty (NULL) in DR1. We measured how well the filled columns
+pick out the fragments of NGC 1483. The method compares the entry density with the field density and asks what
+fraction of the excess each column flags, and at what cost in real field sources.</p>
+<figure>
+  <img alt="Fragment statistics around NGC 1483" src="{{figure:dr1_fragment_flags.png}}">
+  <figcaption>(a) I<sub>E</sub> (BGSUB+BGMOD) around NGC 1483 with the wide-catalogue entries: the 6 main pieces
+  (one <code>parent_id</code>, red circles), entries flagged by <code>spurious_prob</code>&nbsp;&gt;&nbsp;0.7 or
+  NIR-only (orange) and the rest (blue); dotted circles at 40&Prime; and 100&Prime;. (b) Entry density relative to the
+  field (200&Prime;&ndash;420&Prime;): the excess peaks just outside the main pieces and extends further in the
+  deep stack. (c) For each column, the fraction of the 40&Prime;&ndash;100&Prime; excess it flags versus the fraction of
+  field sources it flags (filled: wide, open: deep). The 1:1 line means no discriminating power. Script:
+  <code>demo/07_fragment_flags.py</code>.</figcaption>
+</figure>
+<div class="tablewrap"><table>
+<tr><th>Column</th><th>flags fragments (wide / deep)</th><th>also flags real field sources</th></tr>
+<tr><td><code>spurious_prob &gt; 0.7</code></td><td>23% / 25%</td><td>2.6% / 2.5%</td></tr>
+<tr><td><code>spurious_flag</code> (prob &gt; 0.5)</td><td>32% / 45%</td><td>4.7% / 7.3%</td></tr>
+<tr><td>NIR-only (<code>vis_det = 0</code>)</td><td>57% / 24%</td><td>22% / 11%</td></tr>
+<tr><td><code>deblended_flag</code> (= <code>parent_id != -1</code>)</td><td>34% / 41%</td><td>15% / 18%</td></tr>
+<tr><td><code>spurious_prob &gt; 0.7</code> or NIR-only</td><td><b>76%</b> / 49%</td><td><b>24%</b> / 13%</td></tr>
+<tr><td><code>det_quality_flag</code> bit 512</td><td colspan="2">marks the whole extended-object <i>area</i>, real and fake entries alike</td></tr>
+</table></div>
+<ul>
+<li>Wide: 525 excess entries at 40&Prime;&ndash;100&Prime; (+58%). Deep: 1244 (+75%), with the galaxy itself split into 38 pieces. These are lower limits, since the disc also hides real background sources.</li>
+<li><code>parent_id</code> groups the deblended pieces of one parent. It is <b>local to each tile</b>, so match on (<code>tile_index</code>, <code>parent_id</code>). Most outer-disc fragments are independent detections (<code>parent_id = -1</code>).</li>
+<li>Practical rule: define the galaxy region on the image (or by bit 512), treat entries inside it as unreliable, and correct counts statistically with the field density. Measure the galaxy itself on the mosaic.</li>
+<li>Families can also be artefacts: in the same tile, a 17-entry "galaxy" is the halo of a saturated star plus a detector artefact.</li>
+</ul>
+</section>

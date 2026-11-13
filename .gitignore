@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.python-version
+
+# Tool caches
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+
+# Secrets and local environment (archive credentials live in ~/.zprofile, never here)
+.env
+.env.*
+.envrc
+
+# Generated outputs (rebuild locally)
+# Search index: also indexes the archived paper text in ~/Desktop/euclid/text/, which must not be redistributed.
+kb/kb_index.sqlite
+kb/kb_index.sqlite-*
+guide/site/
+guide/euclid_dr1_quick_guide.html
+figures/*_dry_run.json
+
+# Data never belongs in this folder (downloads go to ~/data/euclid/)
+*.fits
+*.fits.gz
+*.fits.fz
+*.fz
+*.parquet
+*.hdf5
+*.h5
+*.npy
+*.npz
+*.pdf
+
+# Editors, OS and Dropbox
+.DS_Store
+.vscode/
+.idea/
+*.swp
+.dropbox
+.dropbox.attr
+Icon?
+
+# Claude Code: personal settings stay local; project files (launch.json) are shared
+.claude/settings.local.json

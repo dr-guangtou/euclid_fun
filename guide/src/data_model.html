@@ -1,0 +1,30 @@
+<!-- title: Data model
+     description: Product levels, identifiers, tables, units -->
+<section id="model">
+<h2>Data model essentials</h2>
+<h3>A MER tile (per band)</h3>
+<div class="tablewrap"><table>
+<tr><th>File (<code>stype</code>)</th><th>Content</th><th>Cutout service?</th></tr>
+<tr><td><code>EUC_MER_BGSUB-MOSAIC-&lt;band&gt;</code></td><td>background-subtracted mosaic, 19200&sup2; float32 (1.47 GB wide), primary HDU, <code>MAGZERO</code> in header</td><td>yes</td></tr>
+<tr><td><code>BKG</code> = <code>EUC_MER_BGMOD-&lt;band&gt;</code></td><td>the subtracted MER background model, same grid and units</td><td>no (full file)</td></tr>
+<tr><td><code>RMS</code>, <code>FLAG</code></td><td>noise and flag maps</td><td>FLAG yes, RMS no</td></tr>
+<tr><td><code>GRID_PSF</code>, <code>PSF</code> (catalogue PSF)</td><td>VIS: 21&times;21-px stamps on a 120-px grid; NIR: 45&times;45-px stamps per object (+ position tables)</td><td>no</td></tr>
+<tr><td><code>BRIGHT_STAR_MASKS</code></td><td>JSON: per Gaia star RA, Dec, mag, gaia_id, polygon</td><td>no</td></tr>
+<tr><td><code>LAYERS</code></td><td>input exposures with times and footprints (exposure-time maps)</td><td>no</td></tr>
+</table></div>
+<h3>Units</h3>
+<div class="tablewrap"><table>
+<tr><th>Image</th><th>BUNIT</th><th>MAGZERO</th><th>Surface brightness</th></tr>
+<tr><td>VIS (I<sub>E</sub>)</td><td>ADU/s</td><td>24.5</td><td>&mu; = 19.5 &minus; 2.5 log<sub>10</sub>(pixel)</td></tr>
+<tr><td>NISP Y / J / H</td><td>electron/s</td><td>29.8 / 30.1 / 30.0</td><td>&mu; = MAGZERO &minus; 5 &minus; 2.5 log<sub>10</sub>(pixel)</td></tr>
+<tr><td>EXT (ground)</td><td>scaled</td><td>30.0</td><td>idem</td></tr>
+<tr><td>Catalogue fluxes</td><td>&micro;Jy</td><td>23.9</td><td>m = 23.9 &minus; 2.5 log<sub>10</sub>(F)</td></tr>
+</table></div>
+<h3>Catalogue tables and keys</h3>
+<p>MER tables come in five groups: <code>dr1.mer_catalogue_&lt;group&gt;</code> with
+<code>wide_survey</code> (888 M rows), <code>wide_mode</code>, <code>deep_survey</code>, <code>deep_mode</code> and
+<code>deep_visits</code>. These are the only tables with coordinates. Morphology (<code>mer_morphology_*</code>), photo-z
+(<code>phz_*_wide|deep_*</code>), spectroscopic redshifts (<code>spectro_*</code>) and spectra
+(<code>spectra_source_*</code>, key <code>source_id</code>) all join on <code>object_id</code>. The full column list
+is in <code>kb/data_model/tap/</code>.</p>
+</section>

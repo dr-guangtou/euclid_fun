@@ -1,0 +1,10 @@
+schema_name,description
+tap_schema,
+tap_config,
+tap_upload,
+job_upload,
+ivoa,
+catalogue,
+public,
+q1,
+dr1,

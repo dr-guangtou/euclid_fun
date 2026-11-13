@@ -1,0 +1,381 @@
+{
+  "target": "ESO 248-G006 (Abell 3112 BCG)",
+  "ra": 49.4903,
+  "dec": -44.2381,
+  "exposures": [
+    {
+      "file": "EUC_VIS_SWL-DET-005871-03-1-0000000__20250609T101354.767556Z.fits",
+      "observation": "5871",
+      "filter": "VIS",
+      "units_science": [],
+      "units_field": 0,
+      "unit_bytes": 50803200,
+      "file_bytes": 7315678080
+    },
+    {
+      "file": "EUC_NIR_W-CAL-IMAGE_J-5871-3_20250617T173222.262531Z.fits",
+      "observation": "5871",
+      "filter": "NIR_J",
+      "units_science": [],
+      "units_field": 0,
+      "unit_bytes": 49959360,
+      "file_bytes": 799361280
+    },
+    {
+      "file": "EUC_NIR_W-CAL-IMAGE_H-5871-3_20250617T173217.313894Z.fits",
+      "observation": "5871",
+      "filter": "NIR_H",
+      "units_science": [],
+      "units_field": 0,
+      "unit_bytes": 49959360,
+      "file_bytes": 799361280
+    },
+    {
+      "file": "EUC_NIR_W-CAL-IMAGE_Y-5871-3_20250617T172447.340012Z.fits",
+      "observation": "5871",
+      "filter": "NIR_Y",
+      "units_science": [],
+      "units_field": 0,
+      "unit_bytes": 49959360,
+      "file_bytes": 799361280
+    },
+    {
+      "file": "EUC_VIS_SWL-DET-005897-00-1-0000000__20250609T121311.137925Z.fits",
+      "observation": "5897",
+      "filter": "VIS",
+      "units_science": [
+        85
+      ],
+      "units_field": 9,
+      "unit_bytes": 50803200,
+      "file_bytes": 7315678080,
+      "downloads": [
+        {
+          "unit": 85,
+          "bytes": 50803200,
+          "seconds": 18.776895917020738,
+          "file": "EUC_VIS_SWL-DET-005897-00-1-0000000__20250609T121311.137925Z_unit085.fits",
+          "has_data": true
+        }
+      ]
+    },
+    {
+      "file": "EUC_NIR_W-CAL-IMAGE_J-5897-0_20250617T190126.056198Z.fits",
+      "observation": "5897",
+      "filter": "NIR_J",
+      "units_science": [
+        9
+      ],
+      "units_field": 2,
+      "unit_bytes": 49959360,
+      "file_bytes": 799361280,
+      "downloads": [
+        {
+          "unit": 9,
+          "bytes": 49959360,
+          "seconds": 18.049294291064143,
+          "file": "EUC_NIR_W-CAL-IMAGE_J-5897-0_20250617T190126.056198Z_unit009.fits",
+          "has_data": true
+        }
+      ]
+    },
+    {
+      "file": "EUC_NIR_W-CAL-IMAGE_H-5897-0_20250617T185753.687780Z.fits",
+      "observation": "5897",
+      "filter": "NIR_H",
+      "units_science": [
+        9
+      ],
+      "units_field": 2,
+      "unit_bytes": 49959360,
+      "file_bytes": 799361280,
+      "downloads": [
+        {
+          "unit": 9,
+          "bytes": 49959360,
+          "seconds": 14.349229625076987,
+          "file": "EUC_NIR_W-CAL-IMAGE_H-5897-0_20250617T185753.687780Z_unit009.fits",
+          "has_data": true
+        }
+      ]
+    },
+    {
+      "file": "EUC_NIR_W-CAL-IMAGE_Y-5897-0_20250617T190046.851039Z.fits",
+      "observation": "5897",
+      "filter": "NIR_Y",
+      "units_science": [
+        9
+      ],
+      "units_field": 2,
+      "unit_bytes": 49959360,
+      "file_bytes": 799361280,
+      "downloads": [
+        {
+          "unit": 9,
+          "bytes": 49959360,
+          "seconds": 15.96464024996385,
+          "file": "EUC_NIR_W-CAL-IMAGE_Y-5897-0_20250617T190046.851039Z_unit009.fits",
+          "has_data": true
+        }
+      ]
+    },
+    {
+      "file": "EUC_VIS_SWL-DET-005897-01-1-0000000__20250609T121200.880393Z.fits",
+      "observation": "5897",
+      "filter": "VIS",
+      "units_science": [
+        84,
+        85
+      ],
+      "units_field": 10,
+      "unit_bytes": 50803200,
+      "file_bytes": 7315678080,
+      "downloads": [
+        {
+          "unit": 84,
+          "bytes": 50803200,
+          "seconds": 12.937815790995955,
+          "file": "EUC_VIS_SWL-DET-005897-01-1-0000000__20250609T121200.880393Z_unit084.fits",
+          "has_data": true
+        },
+        {
+          "unit": 85,
+          "bytes": 50803200,
+          "seconds": 16.807061166968197,
+          "file": "EUC_VIS_SWL-DET-005897-01-1-0000000__20250609T121200.880393Z_unit085.fits",
+          "has_data": true
+        }
+      ]
+    },
+    {
+      "file": "EUC_NIR_W-CAL-IMAGE_J-5897-1_20250617T190126.051850Z.fits",
+      "observation": "5897",
+      "filter": "NIR_J",
+      "units_science": [
+        9
+      ],
+      "units_field": 2,
+      "unit_bytes": 49959360,
+      "file_bytes": 799361280,
+      "downloads": [
+        {
+          "unit": 9,
+          "bytes": 49959360,
+          "seconds": 14.722909500007518,
+          "file": "EUC_NIR_W-CAL-IMAGE_J-5897-1_20250617T190126.051850Z_unit009.fits",
+          "has_data": true
+        }
+      ]
+    },
+    {
+      "file": "EUC_NIR_W-CAL-IMAGE_H-5897-1_20250617T185753.690844Z.fits",
+      "observation": "5897",
+      "filter": "NIR_H",
+      "units_science": [
+        9
+      ],
+      "units_field": 2,
+      "unit_bytes": 49959360,
+      "file_bytes": 799361280,
+      "downloads": [
+        {
+          "unit": 9,
+          "bytes": 49959360,
+          "seconds": 13.680612416937947,
+          "file": "EUC_NIR_W-CAL-IMAGE_H-5897-1_20250617T185753.690844Z_unit009.fits",
+          "has_data": true
+        }
+      ]
+    },
+    {
+      "file": "EUC_NIR_W-CAL-IMAGE_Y-5897-1_20250617T190046.859844Z.fits",
+      "observation": "5897",
+      "filter": "NIR_Y",
+      "units_science": [
+        9
+      ],
+      "units_field": 2,
+      "unit_bytes": 49959360,
+      "file_bytes": 799361280,
+      "downloads": [
+        {
+          "unit": 9,
+          "bytes": 49959360,
+          "seconds": 16.686295624938793,
+          "file": "EUC_NIR_W-CAL-IMAGE_Y-5897-1_20250617T190046.859844Z_unit009.fits",
+          "has_data": true
+        }
+      ]
+    },
+    {
+      "file": "EUC_VIS_SWL-DET-005897-02-1-0000000__20250609T121217.057492Z.fits",
+      "observation": "5897",
+      "filter": "VIS",
+      "units_science": [
+        86,
+        87
+      ],
+      "units_field": 10,
+      "unit_bytes": 50803200,
+      "file_bytes": 7315678080,
+      "downloads": [
+        {
+          "unit": 86,
+          "bytes": 50803200,
+          "seconds": 14.250109042041004,
+          "file": "EUC_VIS_SWL-DET-005897-02-1-0000000__20250609T121217.057492Z_unit086.fits",
+          "has_data": true
+        },
+        {
+          "unit": 87,
+          "bytes": 50803200,
+          "seconds": 15.577480125008151,
+          "file": "EUC_VIS_SWL-DET-005897-02-1-0000000__20250609T121217.057492Z_unit087.fits",
+          "has_data": true
+        }
+      ]
+    },
+    {
+      "file": "EUC_NIR_W-CAL-IMAGE_J-5897-2_20250617T190126.048526Z.fits",
+      "observation": "5897",
+      "filter": "NIR_J",
+      "units_science": [
+        9
+      ],
+      "units_field": 3,
+      "unit_bytes": 49959360,
+      "file_bytes": 799361280,
+      "downloads": [
+        {
+          "unit": 9,
+          "bytes": 49959360,
+          "seconds": 33.448511042050086,
+          "file": "EUC_NIR_W-CAL-IMAGE_J-5897-2_20250617T190126.048526Z_unit009.fits",
+          "has_data": true
+        }
+      ]
+    },
+    {
+      "file": "EUC_NIR_W-CAL-IMAGE_H-5897-2_20250617T185753.681739Z.fits",
+      "observation": "5897",
+      "filter": "NIR_H",
+      "units_science": [
+        9
+      ],
+      "units_field": 3,
+      "unit_bytes": 49959360,
+      "file_bytes": 799361280,
+      "downloads": [
+        {
+          "unit": 9,
+          "bytes": 49959360,
+          "seconds": 14.735479667084292,
+          "file": "EUC_NIR_W-CAL-IMAGE_H-5897-2_20250617T185753.681739Z_unit009.fits",
+          "has_data": true
+        }
+      ]
+    },
+    {
+      "file": "EUC_NIR_W-CAL-IMAGE_Y-5897-2_20250617T190046.848305Z.fits",
+      "observation": "5897",
+      "filter": "NIR_Y",
+      "units_science": [
+        9
+      ],
+      "units_field": 3,
+      "unit_bytes": 49959360,
+      "file_bytes": 799361280,
+      "downloads": [
+        {
+          "unit": 9,
+          "bytes": 49959360,
+          "seconds": 13.381093582953326,
+          "file": "EUC_NIR_W-CAL-IMAGE_Y-5897-2_20250617T190046.848305Z_unit009.fits",
+          "has_data": true
+        }
+      ]
+    },
+    {
+      "file": "EUC_VIS_SWL-DET-005897-03-1-0000000__20250609T121201.562204Z.fits",
+      "observation": "5897",
+      "filter": "VIS",
+      "units_science": [
+        87
+      ],
+      "units_field": 10,
+      "unit_bytes": 50803200,
+      "file_bytes": 7315678080,
+      "downloads": [
+        {
+          "unit": 87,
+          "bytes": 50803200,
+          "seconds": 14.522149625001475,
+          "file": "EUC_VIS_SWL-DET-005897-03-1-0000000__20250609T121201.562204Z_unit087.fits",
+          "has_data": true
+        }
+      ]
+    },
+    {
+      "file": "EUC_NIR_W-CAL-IMAGE_J-5897-3_20250617T190126.053859Z.fits",
+      "observation": "5897",
+      "filter": "NIR_J",
+      "units_science": [
+        9
+      ],
+      "units_field": 4,
+      "unit_bytes": 49959360,
+      "file_bytes": 799361280,
+      "downloads": [
+        {
+          "unit": 9,
+          "bytes": 49959360,
+          "seconds": 17.961115750018507,
+          "file": "EUC_NIR_W-CAL-IMAGE_J-5897-3_20250617T190126.053859Z_unit009.fits",
+          "has_data": true
+        }
+      ]
+    },
+    {
+      "file": "EUC_NIR_W-CAL-IMAGE_H-5897-3_20250617T185753.679602Z.fits",
+      "observation": "5897",
+      "filter": "NIR_H",
+      "units_science": [
+        9
+      ],
+      "units_field": 4,
+      "unit_bytes": 49959360,
+      "file_bytes": 799361280,
+      "downloads": [
+        {
+          "unit": 9,
+          "bytes": 49959360,
+          "seconds": 15.39934333297424,
+          "file": "EUC_NIR_W-CAL-IMAGE_H-5897-3_20250617T185753.679602Z_unit009.fits",
+          "has_data": true
+        }
+      ]
+    },
+    {
+      "file": "EUC_NIR_W-CAL-IMAGE_Y-5897-3_20250617T190046.816734Z.fits",
+      "observation": "5897",
+      "filter": "NIR_Y",
+      "units_science": [
+        9
+      ],
+      "units_field": 4,
+      "unit_bytes": 49959360,
+      "file_bytes": 799361280,
+      "downloads": [
+        {
+          "unit": 9,
+          "bytes": 49959360,
+          "seconds": 13.460946333012544,
+          "file": "EUC_NIR_W-CAL-IMAGE_Y-5897-3_20250617T190046.816734Z_unit009.fits",
+          "has_data": true
+        }
+      ]
+    }
+  ],
+  "downloaded_bytes": 904331520,
+  "download_seconds": 294.71098308311775
+}

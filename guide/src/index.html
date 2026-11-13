@@ -1,0 +1,58 @@
+<!-- title: Overview
+     description: What DR1 is, the numbers that matter and where to go next -->
+<header class="hero">
+  <h1>Using Euclid DR1 for extended galaxies</h1>
+  <p>A practical guide to the Euclid Data Release 1 (DR1-Foundation, public on 12 November 2026). It covers what was
+  released, how the data are organised, how to get cutouts, files, catalogues and spectra (every recipe was run on
+  release day), and what to watch out for in photometry, 2-D modelling and low-surface-brightness (LSB) work on
+  low-to-intermediate-redshift galaxies. The detailed, searchable knowledge base is in <code>kb/00_index.md</code>.</p>
+</header>
+
+<section id="pages">
+<h2>Guide pages</h2>
+<div class="pagecards">
+  <a href="data_model.html"><b>Data model</b><span>Product levels, identifiers, archive tables, units and zero points</span></a>
+  <a href="access.html"><b>Getting the data</b><span>Tested code: tiles, cutouts, full files, row-range reads, catalogues, spectra, calibrated frames</span></a>
+  <a href="catalogue_services.html"><b>HATS, LSDB and footprint</b><span>The IRSA copy of the catalogues, cross-matching with Gaia, Legacy Surveys DR11, DESI and HSC, and DR1 footprint MOCs</span></a>
+  <a href="gallery.html"><b>Galaxy gallery</b><span>Colour composites of galaxies from the DR1 papers</span></a>
+  <a href="catalogues.html"><b>Catalogues for galaxies</b><span>Which columns to use, shredding of large galaxies, and whether an entry is real</span></a>
+  <a href="lsb.html"><b>Low surface brightness</b><span>Where the sky is removed, measured limits, the ICL team's recipe and how much data one galaxy needs</span></a>
+  <a href="photoz_spectra.html"><b>Photo-z and spectra</b><span>Photometric redshifts, physical parameters and NISP spectra at low redshift</span></a>
+  <a href="issues.html"><b>Known issues and resources</b><span>The top traps, links and acknowledgement text</span></a>
+</div>
+</section>
+
+<section id="glance">
+<h2>At a glance</h2>
+<div class="cards">
+  <div class="card"><div class="num">~1900 deg&sup2;</div><div class="lab">Wide Survey validated (+77 deg&sup2; Deep Fields)</div></div>
+  <div class="card"><div class="num">&gt;900 M</div><div class="lab">galaxies among ~1 billion catalogued sources</div></div>
+  <div class="card"><div class="num">0.1&Prime;/px</div><div class="lab">common MER grid; I<sub>E</sub> PSF FWHM ~0.2&Prime;, Y/J/H ~0.5&Prime;</div></div>
+  <div class="card"><div class="num">25.7 / 24.2</div><div class="lab">EWS 5&sigma; 2&Prime; depth, I<sub>E</sub> / YJH (AB)</div></div>
+  <div class="card"><div class="num">&gt;160 M</div><div class="lab">1-D red-grism spectra (H<sub>E</sub> &lt; 23.5)</div></div>
+  <div class="card"><div class="num">1.7 PB</div><div class="lab">total volume; work on full tiles in ESA Datalabs</div></div>
+</div>
+<div class="callout warn"><b>The one thing to remember for LSB work</b>
+The standard mosaics have had the sky subtracted twice at small scales. Light on scales above about 10&Prime; (VIS)
+and 0.5&prime; (NIR) is partly removed. Only the second (MER) step can be undone: add <code>BGMOD</code> back. For anything
+above ~1&prime;, rebuild from the calibrated frames (see <a href="#lsb">LSB</a>).</div>
+</section>
+
+<section id="content">
+<h2>What is in DR1</h2>
+<div class="tablewrap"><table>
+<tr><th>Stage</th><th>Date</th><th>Content</th></tr>
+<tr><td><b>DR1-Foundation</b></td><td>2026-11-12</td><td>All complete raw frames up to 2025-05-21; validated LE2 imaging (VIS, NISP calibrated frames, stacks, MER mosaics), catalogues (MER, PHZ, SPE), 1-D spectra, VMPZ HEALPix masks</td></tr>
+<tr><td>Full DR1</td><td>mid-2027</td><td>adds shear catalogues and LE3 cosmology products only; DR1-Foundation products are <b>not</b> reprocessed</td></tr>
+<tr><td>DR2</td><td>2029</td><td>~3 years of survey</td></tr>
+</table></div>
+<div class="tablewrap"><table>
+<tr><th>Data set</th><th>Area</th><th>Depth</th><th>MER tiles</th></tr>
+<tr><td>Euclid Wide Survey (EWS)</td><td>~1400 deg&sup2; south (DES) + ~500 deg&sup2; north (UNIONS)</td><td>1 visit (4 dithers; I<sub>E</sub> 4&times;565 s, Y/J/H 4&times;87 s)</td><td>32&prime;&times;32&prime;, index <code>102&hellip;</code></td></tr>
+<tr><td>Deep Fields N / S / Fornax</td><td>24 / 28 / 13 deg&sup2;</td><td>11 / 10 / 2 visits</td><td>17&prime;&times;17&prime; deep stacks <code>101&hellip;</code> + per-visit wide-like mosaics</td></tr>
+<tr><td>COSMOS, CDFS, AEGIS</td><td>4.8 deg&sup2;</td><td>27 / 34 / 18 visits</td><td>deep + wide</td></tr>
+<tr><td>SelfCal, EMDS, ILS, SSO, &hellip;</td><td>2&ndash;38 deg&sup2; each</td><td>wide-like or medium-deep</td><td>various</td></tr>
+</table></div>
+<p>Not in DR1-Foundation: LSB-optimised mosaics (planned later via Datalabs), special tiles for galaxies larger than
+2&prime; (designed, not run), filled bulge/disc (Disk+S&eacute;rsic) columns, shear and LE3 products, and SGS software.</p>
+</section>

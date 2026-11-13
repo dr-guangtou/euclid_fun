@@ -1,0 +1,17 @@
+<!-- title: Photo-z and spectra
+     description: Photometric redshifts, physical parameters and NISP spectra at low redshift -->
+<section id="photoz">
+<h2>Photo-z and spectra at low redshift</h2>
+<ul>
+<li><b>Photo-z</b> (NNPZ on 2FWHM-aperture fluxes scaled to total): at I<sub>E</sub> &lt; 24, outliers are 7&ndash;13% and NMAD 0.04&ndash;0.05. The COSMOS reference sample lacks z &lt; 0.2 and very massive galaxies, so masses are biased low there. The north (no u band) is worse. For nearby extended galaxies, prefer external spectroscopic redshifts (e.g. DESI) and your own total photometry. Note that 251 of 256 galaxies with I<sub>E</sub>&nbsp;&lt;&nbsp;18 in a test tile have <code>phys_param_flags = 1</code>, so the usual <code>= 0</code> cut removes almost every bright nearby galaxy.</li>
+<li><b>Spectra</b> come from the red grism only in the EWS (1.21&ndash;1.89 &micro;m, R&nbsp;&gt;&nbsp;480; blue grism only in deep fields). SPE is optimised for H&alpha; at 0.84 &lt; z &lt; 1.88: only 40&ndash;60% of redshifts are correct at 0.1 &lt; z &lt; 0.84, and &lt; 10% at z &lt; 0.1. At low z the usable lines are Pa&beta;, He&nbsp;I&nbsp;1.083&nbsp;&micro;m, Pa&gamma;, [Fe&nbsp;II] and [S&nbsp;III]&nbsp;0.95&nbsp;&micro;m (z&nbsp;&gt;&nbsp;0.27).</li>
+<li>Recommended SPE cuts: <code>spe_rank = 0</code>, high <code>spe_z_prob</code>, and cross-check with photo-z. Even so, see below.</li>
+</ul>
+<figure>
+  <img alt="Two DR1 spectra" src="{{figure:dr1_spectra_demo.png}}">
+  <figcaption>(a) A bright z&nbsp;=&nbsp;0.149 galaxy near NGC 1483: a quiescent, continuum-dominated red-grism spectrum.
+  (b) A fragment of NGC 1483's disc that SPE placed at z&nbsp;=&nbsp;4.59 with probability ~1. Its spectrum is a broad,
+  sharp-edged hump of dispersed host-disc light, with no line at the host redshift. Do not trust SPE redshifts of
+  pieces of nearby galaxies. Script: <code>demo/04_spectra.py</code>.</figcaption>
+</figure>
+</section>

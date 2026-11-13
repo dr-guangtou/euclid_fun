@@ -1,0 +1,79 @@
+<!-- title: Getting the data
+     description: Tiles, cutouts, full files, catalogues, spectra, calibrated frames (tested code) -->
+<section id="access">
+<h2>Getting the data</h2>
+<div class="callout"><b>Set-up</b>Everything is anonymous. Logging in only adds longer time-outs and user space.
+Use astroquery from GitHub <code>main</code>: the PyPI 0.4.11 release writes empty DR1 cutouts. Use
+<code>schema='dr1'</code>/<code>release=dr1</code>; the Q1 default <code>sedm</code> returns HTTP 401.</div>
+<pre><code>uv add "astroquery @ git+https://github.com/astropy/astroquery.git@main"</code></pre>
+
+<h3>1. Find the tile</h3>
+<pre><code>from astroquery.esa.euclid import Euclid
+ra, dec = 58.19837, -47.47752          # NGC 1483
+tiles = Euclid.launch_job_async(f"""
+SELECT mosaic_product_oid, tile_index, filter_name, file_name, file_path, zero_point, creation_date
+FROM dr1.mosaic_product
+WHERE INTERSECTS(CIRCLE({ra}, {dec}, 0.0001), fov) = 1 AND instrument_name IN ('VIS', 'NISP')
+  AND release_name = 'DR1_R2' AND purpose = 'DATA_RELEASE' AND processing_mode = 'WIDE'
+ORDER BY tile_index, filter_name, creation_date DESC""").get_results()
+# deep-field stacks: release_name='DR1_R1' AND purpose='DATA_RELEASE_DEEP' AND processing_mode='DEEP'</code></pre>
+<p>Keep the newest file per tile and band, and prefer the tile whose centre is closest to the target. Check the cutout
+for zeros: footprints can be larger than the data (in the Deep Fields, use the deep stack). On release day SIA did not
+yet index DR1.</p>
+
+<h3>2. Cutouts (BGSUB mosaics and FLAG maps)</h3>
+<pre><code>import requests
+row = tiles[0]
+r = requests.get("https://eas.esac.esa.int/sas-cutout/cutout", timeout=600, params={
+    "filepath": f"{row['file_path']}/{row['file_name']}",
+    "POS": f"CIRCLE,{ra},{dec},{1.0/60}"})            # half-size 1 arcmin -> 1201 x 1201 pixels
+assert r.content.startswith(b"SIMPLE")                # retry otherwise (service busy)
+open("cutout.fits", "wb").write(r.content)
+# or: Euclid.get_cutout(file_path=..., coordinate=coord, radius=1*u.arcmin, output_file="cutout.fits")</code></pre>
+<p>Cutout headers lack <code>MAGZERO</code>, so take <code>zero_point</code> from the table.</p>
+
+<h3>3. Full files: background model, RMS, PSF, star masks</h3>
+<pre><code>aux = Euclid.launch_job_async(f"SELECT stype, file_name FROM dr1.aux_mosaic "
+                              f"WHERE mosaic_product_oid = {row['mosaic_product_oid']}").get_results()
+name = [a['file_name'] for a in aux if a['stype'] == 'BKG'][0]
+Euclid.get_product(file_name=name, schema="dr1", output_file=name)
+# or stream: https://eas.esac.esa.int/sas-dd/data?file_name=NAME&amp;release=dr1&amp;RETRIEVAL_TYPE=FILE</code></pre>
+<p>The data service answers <b>HTTP range requests</b> (206 Partial Content), so you rarely need a whole file. The
+cutout service rejects <code>BGMOD</code> and <code>RMS</code> maps, but a 1&prime; region of them is just a band of
+rows in the 19200&times;19200 tile. One range request of ~46&nbsp;MB (~26&nbsp;s) replaces the 1.47&nbsp;GB download,
+and the result is pixel-identical:</p>
+<pre><code>from astropy.coordinates import SkyCoord
+from dr1_access import remote_rows_cutout            # demo/dr1_access.py
+data, header = remote_rows_cutout(name, SkyCoord(ra, dec, unit="deg"), half_size_arcmin=0.5)  # BGMOD/RMS name</code></pre>
+
+<h3>4. Catalogue: MER + morphology + photo-z</h3>
+<pre><code>SELECT m.object_id, m.right_ascension, m.declination, m.flux_detection_total, m.flux_vis_sersic,
+       m.point_like_prob, m.spurious_prob, m.det_quality_flag, m.deblended_flag,
+       mo.sersic_sersic_vis_radius, mo.sersic_sersic_vis_index, mo.sersic_sersic_vis_axis_ratio,
+       p.phz_median, p.phz_flags, c.phz_classification
+FROM dr1.mer_catalogue_wide_survey AS m
+JOIN dr1.mer_morphology_wide_survey AS mo ON mo.object_id = m.object_id
+JOIN dr1.phz_photo_z_wide AS p ON p.object_id = m.object_id
+JOIN dr1.phz_classification_wide AS c ON c.object_id = m.object_id
+WHERE 1 = CONTAINS(POINT(m.right_ascension, m.declination), CIRCLE(58.198, -47.478, 0.05))
+  AND c.phz_classification = 2          -- 2 = galaxy, 1 = star (the TAP description is swapped)
+  AND m.spurious_prob &lt; 0.7 AND m.det_quality_flag = 0</code></pre>
+
+<h3>5. Spectra</h3>
+<pre><code>Euclid.get_spectrum(ids="-582334178474562017", schema="dr1", retrieval_type="SPECTRA_RGS",
+                    output_file="spec.fits")
+# -> 'SPECTRA_RGS-dr1 &lt;id&gt;.fits': WAVELENGTH [A], SIGNAL [1e-16 erg/s/cm2/A], MASK, QUALITY, VAR, NDITH
+# MASK bit values: 1 NOT_USE, 2 LOW_SNR, 4 EXT_PRB, 8 HIGH, 16 LOW, 32 REL_FLUX, 64 ABS_FLUX</code></pre>
+
+<h3>6. Calibrated single exposures (for LSB re-processing)</h3>
+<pre><code>SELECT observation_id, instrument_name, filter_name, ra, dec, pa, duration, start_time_mjd, file_name
+FROM dr1.calibrated_frame
+WHERE 1 = CONTAINS(POINT('ICRS', ra, dec), CIRCLE('ICRS', 49.4903, -44.2381, 0.6))   -- frame centres near target
+-- auxiliary BKG / WGT / PSF files: dr1.aux_calibrated (calibrated_frame_id = calibrated_frame_oid)</code></pre>
+<p>A VIS exposure is 7.3&nbsp;GB (144 CCD quadrants &times; SCI/RMS/FLG) and a NIR exposure 0.8&nbsp;GB (16 detectors),
+but the layout is regular. So <code>demo/09_frame_cutouts.py</code> fetches only the quadrants or detectors that cover
+your target, one ~50&nbsp;MB range request each, and cuts the region out with each unit's own WCS. For a 1&prime;
+galaxy this means 0.9&nbsp;GB for VIS+Y+J+H instead of 39&nbsp;GB of whole files (see
+<a href="#volume">how much data for one galaxy</a>).</p>
+<pre><code>uv run python demo/09_frame_cutouts.py --radius-arcmin 0.5 --bands VIS NIR_Y NIR_J NIR_H</code></pre>
+</section>

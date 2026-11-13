@@ -1,0 +1,62 @@
+{
+  "deep_VIS": {
+    "label": "deep_VIS",
+    "zero_point": 24.5,
+    "own_sky_minus_delivered_mu": 29.131256103515625,
+    "own_sky_sign": "negative",
+    "sky_systematic_mu": 31.696077239470174,
+    "limit_3sigma_10arcsec_bgsub": 29.016394500007713,
+    "limit_3sigma_10arcsec_restored": 29.068112735954962,
+    "limit_3sigma_10arcsec_naive_pixel_rms": 30.99122173928083,
+    "number_of_boxes": [
+      460,
+      467
+    ],
+    "bgmod_peak_mu_near_galaxy": 28.76467514038086
+  },
+  "wide_VIS": {
+    "label": "wide_VIS",
+    "zero_point": 24.5,
+    "own_sky_minus_delivered_mu": 29.571420669555664,
+    "own_sky_sign": "negative",
+    "sky_systematic_mu": 30.544428489045305,
+    "limit_3sigma_10arcsec_bgsub": 28.232168641191993,
+    "limit_3sigma_10arcsec_restored": 28.280475197551244,
+    "limit_3sigma_10arcsec_naive_pixel_rms": 29.806778999147088,
+    "number_of_boxes": [
+      1048,
+      1040
+    ],
+    "bgmod_peak_mu_near_galaxy": 27.240108489990234
+  },
+  "deep_NIR_H": {
+    "label": "deep_NIR_H",
+    "zero_point": 30.0,
+    "own_sky_minus_delivered_mu": 28.666698455810547,
+    "own_sky_sign": "negative",
+    "sky_systematic_mu": 30.5123440236105,
+    "limit_3sigma_10arcsec_bgsub": 27.872415423178523,
+    "limit_3sigma_10arcsec_restored": 27.94901703932371,
+    "limit_3sigma_10arcsec_naive_pixel_rms": 30.670219382620004,
+    "number_of_boxes": [
+      662,
+      631
+    ],
+    "bgmod_peak_mu_near_galaxy": NaN
+  },
+  "wide_NIR_H": {
+    "label": "wide_NIR_H",
+    "zero_point": 30.0,
+    "own_sky_minus_delivered_mu": 28.52206039428711,
+    "own_sky_sign": "negative",
+    "sky_systematic_mu": 30.09823388554677,
+    "limit_3sigma_10arcsec_bgsub": 27.039787909560204,
+    "limit_3sigma_10arcsec_restored": 27.00660389494936,
+    "limit_3sigma_10arcsec_naive_pixel_rms": 29.553888281031544,
+    "number_of_boxes": [
+      1052,
+      1075
+    ],
+    "bgmod_peak_mu_near_galaxy": 27.08711814880371
+  }
+}

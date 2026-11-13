@@ -1,0 +1,200 @@
+schema_name,table_name,table_type,description
+tap_schema,tap_schema.schemas,table,TAP SCHEMA schemas
+tap_schema,tap_schema.tables,table,TAP SCHEMA tables
+tap_schema,tap_schema.keys,table,TAP SCHEMA keys
+tap_schema,tap_schema.columns,table,TAP SCHEMA columns
+tap_schema,tap_schema.key_columns,table,TAP SCHEMA key columns
+tap_config,tap_config.coord_sys,table,
+tap_config,tap_config.properties,table,
+ivoa,ivoa.obscore,table,
+public,public.dual,table,"auxiliary table to be used as dummy ""from"""
+q1,q1.spectro_model_catalog_spe_galaxy_models,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/spedpd/dpcards/spe_spepfoutputcatalog.html#models-catalog"" target=""_blank"">Click here for more information</a>"
+q1,q1.spectro_zcatalog_spe_classification,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/spedpd/dpcards/spe_spepfoutputcatalog.html#redshift-catalog"" target=""_blank"">Click here for more information</a>"
+q1,q1.mer_catalogue,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/merdpd/dpcards/mer_finalcatalog.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.mer_cutouts,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/merdpd/dpcards/mer_finalcatalog.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.mer_morphology,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/merdpd/dpcards/mer_finalcatalog.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.phz_classification,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/phzdpd/dpcards/phz_phzpfoutputforl3.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.spectro_zcatalog_spe_galaxy_candidates,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/spedpd/dpcards/spe_spepfoutputcatalog.html#redshift-catalog"" target=""_blank"">Click here for more information</a>"
+q1,q1.spectro_zcatalog_spe_qso_candidates,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/spedpd/dpcards/spe_spepfoutputcatalog.html#redshift-catalog"" target=""_blank"">Click here for more information</a>"
+q1,q1.spectro_zcatalog_spe_quality,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/spedpd/dpcards/spe_spepfoutputcatalog.html#redshift-catalog"" target=""_blank"">Click here for more information</a>"
+q1,q1.spectro_zcatalog_spe_star_candidates,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/spedpd/dpcards/spe_spepfoutputcatalog.html#redshift-catalog"" target=""_blank"">Click here for more information</a>"
+q1,q1.aux_calibrated,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/nirdpd/dpcards/nir_calibratedframe.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information on NIR Calibrated Frame</a><br/><a href=""https://euclid.esac.esa.int/dr/q1/dpdd/visdpd/dpcards/vis_calibratedquadframe.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information on Vis Calibrated Quad Frame</a>"
+q1,q1.aux_mosaic,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/merdpd/dpcards/mer_bksmosaic.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.aux_stacked,table,
+q1,q1.basic_download_data,table,
+q1,q1.calibrated_detectors,table,
+q1,q1.calibrated_frame,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/nirdpd/dpcards/nir_calibratedframe.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information on NIR Calibrated Frame</a><br/><a href=""https://euclid.esac.esa.int/dr/q1/dpdd/visdpd/dpcards/vis_calibratedquadframe.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information on Vis Calibrated Quad Frame</a>"
+q1,q1.combined_spectra,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/sirdpd/dpcards/sir_combinedspectra.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.combined_spectra_product,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/sirdpd/dpcards/sir_combinedspectra.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.data_release,table,
+q1,q1.frame_catalog,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/nirdpd/dpcards/nir_calibratedframe.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information on NIR Calibrated Frame</a><br/><a href=""https://euclid.esac.esa.int/dr/q1/dpdd/visdpd/dpcards/vis_calibratedquadframe.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information on Vis Calibrated Quad Frame</a>"
+q1,q1.mer_final_catalogue,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/merdpd/dpcards/mer_finalcatalog.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.raw_detector,table,
+q1,q1.raw_quadrant,table,
+q1,q1.raw_frame,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/le1dpd/dpcards/le1_nisprawframe.html"" target=""_blank"">Click here for more information on NISP Raw Frame</a><br/><a href=""https://euclid.esac.esa.int/dr/q1/dpdd/le1dpd/dpcards/le1_visrawframe.html"" target=""_blank"">Click here for more information on Vis Raw Frame</a>"
+q1,q1.files_table,table,
+q1,q1.observation_mode,table,
+q1,q1.instrument,table,
+q1,q1.phz_galaxy_sed,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/phzdpd/dpcards/phz_phzpfoutputcatalog.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.phz_nir_physical_parameters,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/phzdpd/dpcards/phz_phzpfoutputforl3.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.phz_photo_z,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/phzdpd/dpcards/phz_phzpfoutputcatalog.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.phz_physical_parameters,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/phzdpd/dpcards/phz_phzpfoutputforl3.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.phz_qso_physical_parameters,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/phzdpd/dpcards/phz_phzpfoutputforl3.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.phz_star_sed,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/phzdpd/dpcards/phz_phzpfoutputcatalog.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.phz_star_template,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/phzdpd/dpcards/phz_phzpfoutputforl3.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.spectro_line_features_catalog_spe_atomic_indices,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/spedpd/dpcards/spe_spepfoutputcatalog.html#lines-catalog"" target=""_blank"">Click here for more information</a>"
+q1,q1.spectro_line_features_catalog_spe_continuum_features,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/spedpd/dpcards/spe_spepfoutputcatalog.html#lines-catalog"" target=""_blank"">Click here for more information</a>"
+q1,q1.spectro_line_features_catalog_spe_line_features_cat,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/spedpd/dpcards/spe_spepfoutputcatalog.html#lines-catalog"" target=""_blank"">Click here for more information</a>"
+q1,q1.spectro_model_catalog_spe_lines_catalog,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/spedpd/dpcards/spe_spepfoutputcatalog.html#models-catalog"" target=""_blank"">Click here for more information</a>"
+q1,q1.spectro_model_catalog_spe_qso_models,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/spedpd/dpcards/spe_spepfoutputcatalog.html#models-catalog"" target=""_blank"">Click here for more information</a>"
+q1,q1.spectro_model_catalog_spe_star_models,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/spedpd/dpcards/spe_spepfoutputcatalog.html#models-catalog"" target=""_blank"">Click here for more information</a>"
+q1,q1.spectro_line_features_catalog_spe_molecular_indices,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/spedpd/dpcards/spe_spepfoutputcatalog.html#lines-catalog"" target=""_blank"">Click here for more information</a>"
+q1,q1.mer_segmentation_map,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/merdpd/dpcards/mer_segmentationmap.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.mosaic_product,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/merdpd/dpcards/mer_bksmosaic.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.observation_mosaic,table,
+q1,q1.observation_stack,table,
+q1,q1.phz_catalogue,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/phzdpd/dpcards/phz_phzpfoutputcatalog.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.phz_catalogue_l3,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/phzdpd/dpcards/phz_phzpfoutputforl3.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.provenance,table,
+q1,q1.sir_frame_detectors,table,
+q1,q1.sir_science_frame,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/sirdpd/dpcards/sir_scienceframe.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.spe_catalogue,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/spedpd/dpcards/spe_spepfoutputcatalog.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.spectra_source,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/sirdpd/dpcards/sir_combinedspectra.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.vmpz_healpix_bitmask,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/le3dpd/id/vmpz-id/dpcards/vmpzid_healpix_bitmask.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.vmpz_healpix_coverage,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/le3dpd/id/vmpz-id/dpcards/vmpzid_healpix_coverage.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.vmpz_healpix_depthmap,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/le3dpd/id/vmpz-id/dpcards/vmpzid_healpix_depthmap.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.vmpz_healpix_footprint_mask,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/le3dpd/id/vmpz-id/dpcards/vmpzid_healpix_footprint.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+q1,q1.vmpz_healpix_infomap,table,"<a href=""https://euclid.esac.esa.int/dr/q1/dpdd/le3dpd/id/vmpz-id/dpcards/vmpzid_healpix_infomap.html#detailed-description-of-the-data-product"" target=""_blank"">Click here for more information</a>"
+dr1,dr1.mer_catalogue_deep_mode,table,
+dr1,dr1.mer_catalogue_deep_mode_photometry,table,
+dr1,dr1.mer_catalogue_deep_survey,table,
+dr1,dr1.mer_catalogue_deep_survey_photometry,table,
+dr1,dr1.mer_catalogue_deep_visits,table,
+dr1,dr1.mer_catalogue_wide_mode,table,
+dr1,dr1.mer_catalogue_wide_survey,table,
+dr1,dr1.mer_cutouts_deep_mode,table,
+dr1,dr1.mer_cutouts_deep_survey,table,
+dr1,dr1.mer_cutouts_deep_visits,table,
+dr1,dr1.mer_cutouts_wide_mode,table,
+dr1,dr1.mer_cutouts_wide_survey,table,
+dr1,dr1.mer_morphology_deep_mode,table,
+dr1,dr1.mer_morphology_deep_survey,table,
+dr1,dr1.mer_morphology_deep_visits,table,
+dr1,dr1.mer_morphology_wide_mode,table,
+dr1,dr1.mer_morphology_wide_survey,table,
+dr1,dr1.phz_classification_deep_mode,table,
+dr1,dr1.phz_classification_deep_survey,table,
+dr1,dr1.phz_classification_deep_visits,table,
+dr1,dr1.phz_classification_wide,table,
+dr1,dr1.phz_galaxy_sed_deep_visits,table,
+dr1,dr1.phz_galaxy_sed_wide,table,
+dr1,dr1.phz_nir_physical_parameters_deep_mode,table,
+dr1,dr1.phz_nir_physical_parameters_deep_survey,table,
+dr1,dr1.phz_nir_physical_parameters_deep_visits,table,
+dr1,dr1.phz_nir_physical_parameters_wide,table,
+dr1,dr1.phz_photo_z_deep_mode,table,
+dr1,dr1.phz_photo_z_deep_survey,table,
+dr1,dr1.phz_photo_z_deep_visits,table,
+dr1,dr1.phz_photo_z_wide,table,
+dr1,dr1.phz_physical_parameters_deep_mode,table,
+dr1,dr1.phz_physical_parameters_deep_survey,table,
+dr1,dr1.phz_physical_parameters_deep_visits,table,
+dr1,dr1.phz_physical_parameters_wide,table,
+dr1,dr1.phz_qso_physical_parameters_deep_mode,table,
+dr1,dr1.phz_qso_physical_parameters_deep_survey,table,
+dr1,dr1.phz_qso_physical_parameters_deep_visits,table,
+dr1,dr1.phz_qso_physical_parameters_wide,table,
+dr1,dr1.phz_star_sed_deep_visits,table,
+dr1,dr1.phz_star_sed_wide,table,
+dr1,dr1.phz_star_template_deep_mode,table,
+dr1,dr1.phz_star_template_deep_survey,table,
+dr1,dr1.phz_star_template_deep_visits,table,
+dr1,dr1.phz_star_template_wide,table,
+dr1,dr1.spectra_source_deep,table,
+dr1,dr1.spectra_source_deep_visits,table,
+dr1,dr1.spectra_source_wide,table,
+dr1,dr1.spectro_line_features_spe_atomic_indices_deep,table,
+dr1,dr1.spectro_line_features_spe_atomic_indices_deep_visits,table,
+dr1,dr1.spectro_line_features_spe_atomic_indices_wide,table,
+dr1,dr1.spectro_line_features_spe_atomic_indices_wide_survey,table,
+dr1,dr1.spectro_line_features_spe_continuum_features_deep,table,
+dr1,dr1.spectro_line_features_spe_continuum_features_deep_visits,table,
+dr1,dr1.spectro_line_features_spe_continuum_features_wide,table,
+dr1,dr1.spectro_line_features_spe_continuum_features_wide_survey,table,
+dr1,dr1.spectro_line_features_spe_line_features_deep,table,
+dr1,dr1.spectro_line_features_spe_line_features_deep_visits,table,
+dr1,dr1.spectro_line_features_spe_line_features_wide,table,
+dr1,dr1.spectro_line_features_spe_line_features_wide_survey,table,
+dr1,dr1.spectro_line_features_spe_molecular_indices_deep,table,
+dr1,dr1.spectro_line_features_spe_molecular_indices_deep_visits,table,
+dr1,dr1.spectro_line_features_spe_molecular_indices_wide,table,
+dr1,dr1.spectro_line_features_spe_molecular_indices_wide_survey,table,
+dr1,dr1.spectro_model_spe_galaxy_models_deep,table,
+dr1,dr1.spectro_model_spe_galaxy_models_deep_visits,table,
+dr1,dr1.spectro_model_spe_galaxy_models_wide,table,
+dr1,dr1.spectro_model_spe_galaxy_models_wide_survey,table,
+dr1,dr1.spectro_model_spe_qso_models_deep,table,
+dr1,dr1.spectro_model_spe_qso_models_deep_visits,table,
+dr1,dr1.spectro_model_spe_qso_models_wide,table,
+dr1,dr1.spectro_model_spe_qso_models_wide_survey,table,
+dr1,dr1.spectro_model_spe_star_models_deep,table,
+dr1,dr1.spectro_model_spe_star_models_deep_visits,table,
+dr1,dr1.spectro_model_spe_star_models_wide,table,
+dr1,dr1.spectro_model_spe_star_models_wide_survey,table,
+dr1,dr1.spectro_z_spe_classification_deep,table,
+dr1,dr1.spectro_z_spe_classification_deep_visits,table,
+dr1,dr1.spectro_z_spe_classification_wide,table,
+dr1,dr1.spectro_z_spe_classification_wide_survey,table,
+dr1,dr1.spectro_z_spe_galaxy_candidates_deep,table,
+dr1,dr1.spectro_z_spe_galaxy_candidates_deep_visits,table,
+dr1,dr1.spectro_z_spe_galaxy_candidates_wide,table,
+dr1,dr1.spectro_z_spe_galaxy_candidates_wide_survey,table,
+dr1,dr1.spectro_z_spe_qso_candidates_deep,table,
+dr1,dr1.spectro_z_spe_qso_candidates_deep_visits,table,
+dr1,dr1.spectro_z_spe_qso_candidates_wide,table,
+dr1,dr1.spectro_z_spe_qso_candidates_wide_survey,table,
+dr1,dr1.spectro_z_spe_quality_deep,table,
+dr1,dr1.spectro_z_spe_quality_deep_visits,table,
+dr1,dr1.spectro_z_spe_quality_wide,table,
+dr1,dr1.spectro_z_spe_quality_wide_survey,table,
+dr1,dr1.spectro_z_spe_star_candidates_deep,table,
+dr1,dr1.spectro_z_spe_star_candidates_deep_visits,table,
+dr1,dr1.spectro_z_spe_star_candidates_wide,table,
+dr1,dr1.spectro_z_spe_star_candidates_wide_survey,table,
+dr1,dr1.aux_calibrated,table,
+dr1,dr1.aux_common,table,
+dr1,dr1.aux_mosaic,table,
+dr1,dr1.aux_stacked,table,
+dr1,dr1.basic_download_data,table,
+dr1,dr1.calibrated_detectors,table,
+dr1,dr1.calibrated_frame,table,
+dr1,dr1.column_values,table,
+dr1,dr1.combined_spectra,table,
+dr1,dr1.combined_spectra_product,table,
+dr1,dr1.data_release,table,
+dr1,dr1.files_table,table,
+dr1,dr1.frame_catalog,table,
+dr1,dr1.instrument,table,
+dr1,dr1.mer_final_catalogue,table,
+dr1,dr1.mer_segmentation_map,table,
+dr1,dr1.mosaic_product,table,
+dr1,dr1.observation_mode,table,
+dr1,dr1.observation_mosaic,table,
+dr1,dr1.observation_stack,table,
+dr1,dr1.phz_catalogue,table,
+dr1,dr1.phz_catalogue_deep,table,
+dr1,dr1.phz_catalogue_l3,table,
+dr1,dr1.provenance,table,
+dr1,dr1.raw_detector,table,
+dr1,dr1.raw_frame,table,
+dr1,dr1.raw_quadrant,table,
+dr1,dr1.sir_frame_detectors,table,
+dr1,dr1.sir_science_frame,table,
+dr1,dr1.spe_catalogue,table,
+dr1,dr1.spectra_source,table,
+dr1,dr1.vmpz_healpix_bitmask,table,
+dr1,dr1.vmpz_healpix_coverage,table,
+dr1,dr1.vmpz_healpix_depthmap,table,
+dr1,dr1.vmpz_healpix_effective_coverage,table,
+dr1,dr1.vmpz_healpix_footprint_mask,table,
+dr1,dr1.vmpz_healpix_infomap,table,

@@ -1,0 +1,48 @@
+<!-- title: HATS, LSDB and footprint
+     description: IRSA HATS copy of the catalogues, cross-matching with LSDB, DR1 footprint and MOCs -->
+<section id="hats">
+<h2>Catalogues at scale: IRSA HATS + LSDB</h2>
+<p>IRSA serves 57 DR1 catalogues (MER, PHZ, SPE, SIR combined spectra) as HEALPix-partitioned Parquet ("HATS") in a
+public AWS bucket. LSDB is the Python client. We checked it hands-on: the MER wide-survey copy is <b>identical to the
+ESA DR1_R2 table</b> (888,152,165 rows; same <code>object_id</code>s and values in a test cone).</p>
+<pre><code>import lsdb                                   # uv add lsdb s3fs
+euclid = lsdb.open_catalog(
+    "s3://nasa-irsa-euclid-dr1/contributed/dr1/hats/reformatted_catalogs/mer_catalogue_wide_survey",
+    columns=["object_id", "ra", "dec", "flux_vis_sersic", "spurious_prob", "det_quality_flag"])
+legacy = lsdb.open_catalog("http://slac.data.lsdb.io:10942/lsdb/legacysurvey_dr11.0_south",
+                           columns=["OBJID", "RA", "DEC", "TYPE", "FLUX_R", "MASKBITS"])
+matched = (euclid.cone_search(ra=58.198, dec=-47.478, radius_arcsec=300)
+           .crossmatch(legacy, radius_arcsec=1.0, n_neighbors=1, suffixes=("_euclid", "_ls"),
+                       suffix_method="all_columns")
+           .compute())                         # nothing is read before .compute()</code></pre>
+<div class="tablewrap"><table>
+<tr><th>Point</th><th>What we measured / found</th></tr>
+<tr><td>URL scheme</td><td>use <code>s3://</code>; the <code>https://</code> form of the bucket opens but fails at <code>.compute()</code></td></tr>
+<tr><td>Column names</td><td>as ESA but lower case, with <code>ra</code>, <code>dec</code>, <code>tileid</code> instead of <code>right_ascension</code>, <code>declination</code>, <code>tile_index</code>; no release column; pyarrow dtypes (<code>&lt;NA&gt;</code>)</td></tr>
+<tr><td>Speed</td><td>5&prime; cone: HATS 51&nbsp;s versus ESA TAP 9&nbsp;s; 30&prime; cone (357k rows): 41&nbsp;s versus 16&nbsp;s. A cone reads whole ~1.3&nbsp;GB partitions, and nothing is cached. Use TAP for single galaxies and HATS for survey-scale work and cross-matches.</td></tr>
+<tr><td>Cross-match partners</td><td>Gaia DR3, Legacy Surveys DR10.1 and <b>DR11.0 North/South</b> (DR11 on a SLAC server linked from data.lsdb.io; includes unWISE forced photometry), DESI DR1 redshifts, HSC PDR3 (one catalogue per band), AllWISE, NEOWISE, 2MASS. All Euclid catalogues have 10&Prime; margins for edge-safe matching.</td></tr>
+<tr><td>Not in HATS yet</td><td><code>phz_photo_z_wide</code>; the wide-mode and deep-mode MER tables; a merged-objects table</td></tr>
+</table></div>
+<p>Script: <code>demo/06_hats_crossmatch.py</code>; details in <code>kb/14_hats_lsdb_access.md</code>.</p>
+</section>
+
+<section id="footprint">
+<h2>DR1 footprint</h2>
+<p>DR1-Foundation has <b>no single survey-wide footprint file</b>. The official LE3 VMPZ HEALPix maps (footprint,
+coverage, effective coverage, bit mask, depth, info maps) come <i>per MER tile and band</i>: Nside 16384 (12.9&Prime;),
+NESTED, <code>COORDSYS = 'celestial'</code>, ~19,400 pixels (0.249&nbsp;deg&sup2;) and ~240&nbsp;KB per tile file. For
+quick "is it in DR1?" checks and for cross-matching, build a MOC.</p>
+<figure>
+  <img alt="All-sky map of the DR1 footprint" src="{{figure:dr1_footprint.png}}">
+  <figcaption>DR1-Foundation footprint from the VIS tile polygons in <code>dr1.mosaic_product</code> (MOC order 13):
+  8975 wide-survey tiles cover 2235&nbsp;deg&sup2; and 1368 deep-field stacks cover 87&nbsp;deg&sup2;. The polygons
+  include tile margins and partly empty edge tiles, so these are upper limits. For comparison, 2092&nbsp;deg&sup2; were
+  observed in VIS and ~1900&nbsp;deg&sup2; validated; an order-9 MOC from the IRSA HATS index gives 2095&nbsp;deg&sup2;.
+  Script: <code>demo/08_dr1_footprint.py</code>; the MOC files go to <code>~/data/euclid/dr1_demo/footprint/</code>.</figcaption>
+</figure>
+<pre><code>from pathlib import Path
+import astropy.units as u
+from mocpy import MOC
+moc = MOC.from_fits(Path.home() / "data/euclid/dr1_demo/footprint/dr1_wide_vis_tiles_moc_order13.fits")
+moc.contains_lonlat([58.198] * u.deg, [-47.478] * u.deg)      # -> array([ True])</code></pre>
+</section>
