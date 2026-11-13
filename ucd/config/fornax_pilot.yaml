@@ -24,6 +24,12 @@ euclid:
   catalogue: dr1.mer_catalogue_wide_survey
   morphology: dr1.mer_morphology_wide_survey
   classification: dr1.phz_classification_wide
+  photo_z: dr1.phz_photo_z_wide
+  with_photo_z: true          # one extra join; never used in the selection (user decision)
+  minimum_flux_ujy: 0.912     # I_E < 24.0: every plausible counterpart or fragment of a Gaia source
+  download_strips: 8
+  match_radius_arcsec: 1.0
+  match_maximum_magnitude: 23.5
   footprint_moc: ~/data/euclid/dr1_demo/footprint/dr1_wide_vis_tiles_moc_order13.fits
 
 legacy:
