@@ -1,0 +1,46 @@
+# Build the quick guide from guide/src/ and figures/ and publish guide/site/ on GitHub Pages.
+# One-time setting: repository Settings -> Pages -> Source = "GitHub Actions".
+name: Publish guide
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "guide/src/**"
+      - "figures/**"
+      - "scripts/build_guide.py"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+      # The guide needs only Pillow, not the full analysis environment.
+      - name: Build guide
+        run: uv run --no-project --python 3.12 --with pillow python scripts/build_guide.py
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: guide/site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

@@ -94,3 +94,17 @@
   ESA's CC BY-NC 3.0 IGO.
 - Open: decide whether to publish the guide with GitHub Pages, which would need a build step because `guide/site/` is
   not tracked.
+
+# TODO: publish the guide on GitHub Pages (2026-11-13)
+
+- [x] `.github/workflows/pages.yml`: build with Pillow only, deploy `guide/site/` (actions: checkout v7, setup-uv v7,
+      configure-pages v6, upload-pages-artifact v5, deploy-pages v5; latest major tags checked on GitHub)
+- [x] `build_guide.py` links `<code>path</code>` mentions of repository files to GitHub (12 links, all HTTP 200)
+- [x] Clean-copy build of tracked files only: 9 pages, 6 figures, 1.8 MB in 2 s; no broken relative links
+- [ ] User: Settings -> Pages -> Source = "GitHub Actions"; then merge `add-github-pages` into `main`
+- [ ] Check the first workflow run and the live site
+- [ ] Optional: a "what we did" page built from the todo reviews and lessons
+
+## Review
+
+- Not verified yet: the workflow itself (it has not run on GitHub; Pages must be enabled first).

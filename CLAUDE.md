@@ -20,6 +20,8 @@ redshift galaxies, including low-surface-brightness work).
   `kb/kb_index.sqlite`, which contains that text. The built guide (`guide/site/`, single-file HTML) is generated and
   not tracked.
 - Pre-commit runs Ruff from the project environment: `uv run pre-commit install` once per clone.
+- The guide is public at https://dr-guangtou.github.io/euclid_fun/, built and deployed by
+  `.github/workflows/pages.yml` on pushes to `main`. Write anything in `guide/src/` for a public audience.
 
 ## Figures
 

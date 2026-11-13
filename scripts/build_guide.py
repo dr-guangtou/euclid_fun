@@ -10,6 +10,8 @@ Outputs:
   guide/euclid_dr1_quick_guide.html                                    (all pages in one file, figures inlined)
 
 Links written as href="#id" are rewritten to point at the page that holds that id.
+Repository paths written as <code>path</code> (e.g. <code>demo/04_spectra.py</code>) that exist in this repository
+become links to the file on GitHub, so they also work on the published site (GitHub Pages).
 Figures are downscaled to at most 1600 px wide; image-heavy figures are stored as JPEG, line plots as PNG.
 
 Usage: uv run python scripts/build_guide.py
@@ -42,6 +44,8 @@ page_order = [
 line_plot_figures = {"dr1_spectra_demo.png"}
 maximum_width = 1600
 figure_pattern = re.compile(r"\{\{figure:([^}]+)\}\}")
+repository_url = "https://github.com/dr-guangtou/euclid_fun"
+repository_path_pattern = re.compile(r"<code>((?:kb|demo|scripts|figures|docs|guide)/[^<\s]*)</code>")
 
 
 def read_page(slug: str) -> dict:
@@ -88,6 +92,18 @@ def rewrite_links(content: str, current_slug: str | None, id_to_page: dict[str, 
         return f'href="{page}.html#{target_id}"'
 
     return re.sub(r'href="#([^"]+)"', replace, content)
+
+
+def link_repository_paths(html: str) -> str:
+    def replace(match: re.Match) -> str:
+        path = match.group(1)
+        target = project_root / path
+        if not target.exists():
+            return match.group(0)
+        kind = "tree" if target.is_dir() else "blob"
+        return f'<a href="{repository_url}/{kind}/main/{path.rstrip("/")}"><code>{path}</code></a>'
+
+    return repository_path_pattern.sub(replace, html)
 
 
 def site_navigation(pages: list[dict], current_slug: str) -> str:
@@ -149,7 +165,7 @@ def build_site(template: str, pages: list[dict], id_to_page: dict[str, str]) -> 
             content=content,
             pager=pager(pages, index),
         )
-        html = figure_pattern.sub(figure_link, html)
+        html = link_repository_paths(figure_pattern.sub(figure_link, html))
         (site_dir / f"{page['slug']}.html").write_text(html)
     size = sum(path.stat().st_size for path in site_dir.rglob("*") if path.is_file())
     print(f"wrote {site_dir}/ ({len(pages)} pages, {len(written)} figures, {size / 1e6:.1f} MB)")
@@ -166,7 +182,7 @@ def build_single_file(template: str, pages: list[dict], id_to_page: dict[str, st
         data, mime, _ = encoded_figure(match.group(1))
         return f"data:{mime};base64,{base64.b64encode(data).decode()}"
 
-    html = figure_pattern.sub(data_uri, html)
+    html = link_repository_paths(figure_pattern.sub(data_uri, html))
     single_file_path.write_text(html)
     print(f"wrote {single_file_path} ({single_file_path.stat().st_size / 1e6:.1f} MB)")
 

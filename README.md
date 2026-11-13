@@ -8,6 +8,8 @@ Everything here was checked against the live ESA archive on release day. Where t
 disagree, the hands-on result wins and the discrepancy is recorded in
 [kb/11_known_issues.md](kb/11_known_issues.md).
 
+**Read the quick guide online: <https://dr-guangtou.github.io/euclid_fun/>**
+
 ![Colour composites of eight galaxies from the DR1 papers](figures/dr1_gallery.png)
 
 ## What is here
@@ -17,7 +19,7 @@ disagree, the hands-on result wins and the discrepancy is recorded in
 | [kb/](kb/00_index.md) | Knowledge base: 14 topical notes (data model, access, processing, PSF, catalogues, photo-z, spectra, masks, LSB, known issues, HATS/LSDB), one structured summary per DR1 paper, DPDD notes and a dump of the archive's TAP schema. Start at [kb/00_index.md](kb/00_index.md). |
 | [demo/](demo/README.md) | Runnable end-to-end examples (`01`-`09`) built on a small helper library, `demo/dr1_access.py`. |
 | [figures/](figures/) | Figures and measured numbers (JSON) produced by the demo. |
-| `guide/src/` | Sources of a multi-page HTML quick guide; build it with `scripts/build_guide.py`. |
+| `guide/src/` | Sources of the multi-page HTML quick guide. On every push to `main` that touches the guide, `.github/workflows/pages.yml` builds it with `scripts/build_guide.py` and publishes it on [GitHub Pages](https://dr-guangtou.github.io/euclid_fun/). |
 | [scripts/](scripts/) | Archive fetching, text extraction, TAP schema dump, full-text search, guide builder, shared plot style. |
 | [docs/](docs/) | [SPEC](docs/SPEC.md) (architecture), [todo](docs/todo.md) (tasks), [lessons](docs/lessons.md) (mistakes and their fixes). |
 
@@ -72,7 +74,7 @@ Data never go into this repository:
   text, are kept locally in `~/Desktop/euclid/`. `scripts/fetch_sources.sh` and `scripts/extract_text.py` rebuild that
   archive. Without it, the search index covers only the knowledge-base notes.
 - **Generated outputs:** the built guide (`guide/site/`, `guide/euclid_dr1_quick_guide.html`) and the search index
-  (`kb/kb_index.sqlite`) are not tracked.
+  (`kb/kb_index.sqlite`) are not tracked. The published website is built by GitHub Actions, not committed.
 
 ## Development
 
